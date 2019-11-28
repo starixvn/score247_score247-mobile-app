@@ -212,8 +212,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             }
             catch (Exception ex)
             {
-                await LoggingService.LogExceptionAsync(ex);
-
                 HasData = false;
 
                 return null;

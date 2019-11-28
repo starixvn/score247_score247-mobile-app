@@ -39,7 +39,6 @@ namespace LiveScore.Core.ViewModels
             NavigationService = navigationService;
             DependencyResolver = dependencyResolver;
 
-            LoggingService = DependencyResolver.Resolve<ILoggingService>();
             networkConnectionManager = DependencyResolver.Resolve<INetworkConnection>();
 
             var settings = DependencyResolver.Resolve<ISettings>();
@@ -61,8 +60,6 @@ namespace LiveScore.Core.ViewModels
         public IEventAggregator EventAggregator { get; protected set; }
 
         public INavigationService NavigationService { get; protected set; }
-
-        public ILoggingService LoggingService { get; protected set; }
 
         /// <summary>
         /// Used for not implemented page
@@ -148,10 +145,6 @@ namespace LiveScore.Core.ViewModels
 
             if (!navigated.Success)
             {
-                await LoggingService.LogExceptionAsync(
-                    navigated.Exception,
-                    $"Cannot navigate to home. Exception {navigated.Exception.Message}"
-                    ).ConfigureAwait(false);
             }
         }
 

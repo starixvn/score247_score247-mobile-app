@@ -29,7 +29,6 @@
     <Compile Remove="ViewModels\NavigationTitleViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Tests\LiveScore.Common.Tests.csproj" />
     <ProjectReference Include="..\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>

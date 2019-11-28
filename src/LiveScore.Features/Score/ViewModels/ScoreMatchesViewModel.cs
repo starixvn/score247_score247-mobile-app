@@ -214,7 +214,6 @@ namespace LiveScore.Features.Score.ViewModels
             }
             catch (Exception ex)
             {
-                LoggingService.LogException(ex);
             }
         }
 

@@ -26,23 +26,10 @@ namespace LiveScore.Soccer.Services
         Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language);
     }
 
-    public class MatchService : BaseService, IMatchService, ISoccerMatchService
+    public class MatchService : BaseService, IMatchService
     {
-        private const int LongDuration = 7_200;
-
-        private readonly IApiService apiService;
-        private readonly ICacheManager cacheManager;
-        private readonly MatchApi matchApi;
-
-        public MatchService(
-            IApiService apiService,
-            ICacheManager cacheManager,
-            ILoggingService loggingService,
-            MatchApi matchApi = null) : base(loggingService)
+        public MatchService()
         {
-            this.apiService = apiService;
-            this.cacheManager = cacheManager;
-            this.matchApi = matchApi ?? apiService.GetApi<MatchApi>();
         }
 
         [Time]
@@ -50,10 +37,21 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await apiService.Execute(() => matchApi.GetMatches(
-                    dateTime.BeginningOfDay().ToApiFormat(),
-                    dateTime.EndOfDay().ToApiFormat(),
-                    language.DisplayName));
+                var random = new Random();
+                var matches = new List<SoccerMatch>();
+
+                for (var i = 0; i < 200; i++)
+                {
+                    var match = new SoccerMatch(random.Next(100000).ToString(),
+                        DateTime.Now, DateTime.Now, random.Next(100000).ToString(),
+                        "Champion League", "1", "Real Madrid", "2", "Barcelona", MatchStatus.FullTime,
+                        MatchStatus.FullTime, 2, 2, "1", null, 0, 0, 0, 0, 0, 0, 0, "", 0,
+                        EventType.MatchEnded, null, "", "Spain", DateTime.Now, false, 1, "", null, "", 0, "", "Champion League" + random.Next(100000));
+
+                    matches.Add(match);
+                }
+
+                return matches;
             }
             catch (Exception ex)
             {
@@ -66,92 +64,12 @@ namespace LiveScore.Soccer.Services
         [Time]
         public async Task<MatchInfo> GetMatchAsync(string matchId, Language language)
         {
-            try
-            {
-                return await apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchInfo();
-            }
+            return new MatchInfo();
         }
 
         public async Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language)
         {
-            try
-            {
-                return await apiService.Execute(() => matchApi.GetLiveMatches(language.DisplayName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return Enumerable.Empty<IMatch>();
-            }
-        }
-
-        public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, bool forceFetchLatestData = false)
-        {
-            try
-            {
-                var cacheKey = $"SoccerMatch:{matchId}:coverage";
-
-                return await cacheManager.GetOrSetAsync(
-                        cacheKey,
-                        () => apiService.Execute(() => matchApi.GetMatchCoverage(matchId, language.DisplayName)),
-                        LongDuration, forceFetchLatestData)
-                    .ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchCoverage { MatchId = matchId };
-            }
-        }
-
-        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language)
-        {
-            try
-            {
-                return await apiService.Execute(() => matchApi.GetMatchCommentaries(matchId, language.DisplayName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return Enumerable.Empty<MatchCommentary>();
-            }
-        }
-
-        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language)
-        {
-            try
-            {
-                return await apiService.Execute(() => matchApi.GetMatchStatistic(matchId, language.DisplayName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchStatistic(matchId);
-            }
-        }
-
-        public async Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language)
-        {
-            try
-            {
-                return await apiService.Execute(() => matchApi.GetMatchLineups(matchId, language.DisplayName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchLineups(matchId);
-            }
+            return Enumerable.Empty<IMatch>();
         }
     }
 }

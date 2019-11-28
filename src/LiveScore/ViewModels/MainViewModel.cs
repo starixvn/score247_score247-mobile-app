@@ -15,20 +15,12 @@ namespace LiveScore.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly ICacheManager cacheManager;
-        private readonly ILoggingService loggingService;
-
         public MainViewModel(
-            ICacheManager cacheManager,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator,
-            ILoggingService loggingService)
+            IEventAggregator eventAggregator)
             : base(navigationService, serviceLocator, eventAggregator)
         {
-            this.cacheManager = cacheManager;
-            this.loggingService = loggingService;
-
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
 
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
@@ -46,8 +38,6 @@ namespace LiveScore.ViewModels
 
         private async Task CleanCacheAndRefresh()
         {
-            await cacheManager.InvalidateAllAsync();
-
             await NavigateToHomeAsync();
         }
 
@@ -69,7 +59,6 @@ namespace LiveScore.ViewModels
             }
             catch (Exception ex)
             {
-                loggingService.LogExceptionAsync(ex, $"Error when receive OnConnectionChanged at {DateTime.Now}");
             }
         }
 

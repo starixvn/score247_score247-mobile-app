@@ -23,12 +23,10 @@ namespace LiveScore.Soccer.Models.Matches
               });
 
         private readonly ISettings settings;
-        private readonly ILoggingService loggingService;
 
-        public MatchMinuteBuilder(ISettings settings, ILoggingService loggingService)
+        public MatchMinuteBuilder(ISettings settings)
         {
             this.settings = settings;
-            this.loggingService = loggingService;
         }
 
         // TODO: Remove casting
@@ -70,7 +68,6 @@ namespace LiveScore.Soccer.Models.Matches
             catch (Exception ex)
             {
                 /// TODO: temporarily add custom message to log lib
-                loggingService.LogException(ex, $"Match Id:{match?.Id}");
 
                 return string.Empty;
             }

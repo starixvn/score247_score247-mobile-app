@@ -99,14 +99,8 @@
     <Compile Update="Views\Matches\Templates\MatchDetails\LineUps\LineupsTemplate.xaml.cs">
       <DependentUpon>LineUpsTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsTemplate.xaml.cs">
-      <DependentUpon>OddsTemplate.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Matches\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsMovementView.xaml.cs">
-      <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Matches\Templates\MatchDetails\Statistics\PossessionTemplate.xaml.cs">
       <DependentUpon>PossessionTemplate.xaml</DependentUpon>
@@ -118,7 +112,6 @@
 
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="MessagePack" Version="1.8.80" />
     <PackageReference Include="MessagePackAnalyzer" Version="1.8.80" />
     <PackageReference Include="MethodTimer.Fody" Version="3.1.0" />

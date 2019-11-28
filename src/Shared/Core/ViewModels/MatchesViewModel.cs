@@ -138,15 +138,6 @@ namespace LiveScore.Core.ViewModels
             {
                 { "Match", matchItem.Match }
             };
-
-            var navigated = await NavigationService
-                .NavigateAsync("MatchDetailView" + CurrentSportId, parameters)
-                .ConfigureAwait(false);
-
-            if (!navigated.Success)
-            {
-                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
-            }
         }
 
         protected virtual async Task LoadMatchesAsync()
@@ -196,7 +187,6 @@ namespace LiveScore.Core.ViewModels
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems));
-
         }
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches) => InitializeMatchItems(matches);

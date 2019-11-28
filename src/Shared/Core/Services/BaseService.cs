@@ -6,11 +6,8 @@ namespace LiveScore.Core.Services
 {
     public class BaseService
     {
-        protected readonly ILoggingService LoggingService;
-
-        public BaseService(ILoggingService loggingService)
+        public BaseService()
         {
-            LoggingService = loggingService;
         }
 
         protected virtual void HandleException(Exception ex)
@@ -18,12 +15,9 @@ namespace LiveScore.Core.Services
             if (ex is ApiException apiException)
             {
                 var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
-
-                LoggingService.LogExceptionAsync(apiException, message);
             }
             else
             {
-                LoggingService.LogExceptionAsync(ex);
             }
         }
     }

@@ -138,7 +138,6 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (!navigated.Success)
             {
-                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
     }

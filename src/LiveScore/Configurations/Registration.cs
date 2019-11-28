@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
-using Fanex.Caching;
 using FFImageLoading.Helpers;
 using LiveScore.Common;
 using LiveScore.Common.Helpers;
@@ -60,18 +59,6 @@ namespace LiveScore.Configurations
             return containerRegistry;
         }
 
-        public static IContainerRegistry UseSentry(this IContainerRegistry containerRegistry)
-        {
-            SentrySdk.Init(o =>
-            {
-                o.Dsn = new Dsn(Configuration.SentryDsn);
-                o.Debug = Configuration.Debug;
-                o.Environment = Configuration.Enviroment;
-            });
-
-            return containerRegistry;
-        }
-
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
             SetupServicePointManager();
@@ -83,15 +70,9 @@ namespace LiveScore.Configurations
 
             AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
 
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
-
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
-            containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
-            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
 
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
-
-            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
@@ -118,8 +99,6 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterInstance<Action<Action>>(
                 Xamarin.Forms.Device.BeginInvokeOnMainThread,
                 FuncNameConstants.BeginInvokeOnMainThreadFuncName);
-
-            containerRegistry.RegisterSingleton<IMiniLogger, FFLoadingImageLogger>();
 
             CompositeResolver.RegisterAndSetAsDefault(
                 SoccerModelResolver.Instance,

@@ -20,8 +20,6 @@ namespace LiveScore.iOS
     [Register("AppDelegate")]
     public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        private ILoggingService loggingService;
-
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Profiler.Start("IOS Application");
@@ -54,8 +52,6 @@ namespace LiveScore.iOS
 
         private void HandleGlobalExceptions(App application)
         {
-            loggingService = application.Container.Resolve<ILoggingService>();
-
             Runtime.MarshalManagedException += HandleMarshalException;
             Runtime.MarshalObjectiveCException += HandleMarshalObjectCException;
             AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
@@ -65,27 +61,22 @@ namespace LiveScore.iOS
 
         private void CurrentDomain_FirstChanceException(object sender, FirstChanceExceptionEventArgs e)
         {
-            loggingService.LogException(e.Exception);
         }
 
         private void HandleMarshalException(object sender, MarshalManagedExceptionEventArgs args)
         {
-            loggingService.LogException(args.Exception);
         }
 
         private void HandleMarshalObjectCException(object sender, MarshalObjectiveCExceptionEventArgs args)
         {
-            loggingService.LogException(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
         }
 
         private void UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            loggingService.LogException(e.Exception);
         }
 
         private void UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            loggingService.LogException(e.ExceptionObject as Exception);
         }
     }
 

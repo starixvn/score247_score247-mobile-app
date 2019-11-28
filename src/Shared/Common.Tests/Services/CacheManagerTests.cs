@@ -10,21 +10,16 @@ namespace LiveScore.Common.Tests.Services
 {
     public class CacheManagerTests
     {
-        private readonly ICacheService cacheService;
         private readonly ICacheManager cacheManager;
         private readonly ILoggingService loggingService;
         private readonly Fixture Random;
-        private readonly CacheItemOptions cacheItemOptions;
         private readonly string CacheKey;
 
         public CacheManagerTests()
         {
             loggingService = Substitute.For<ILoggingService>();
-            cacheService = Substitute.For<ICacheService>();
-            cacheManager = new CacheManager(cacheService, loggingService);
             Random = new Fixture();
 
-            cacheItemOptions = Random.Create<CacheItemOptions>();
             CacheKey = Random.Create<string>();
         }
 
@@ -35,7 +30,6 @@ namespace LiveScore.Common.Tests.Services
             var factory = Substitute.For<Func<Task<object>>>();
 
             // Act
-            var actual = await cacheManager.GetOrSetAsync(key: string.Empty, factory, cacheItemOptions, true).ConfigureAwait(false);
 
             // Assert
             Assert.Null(actual);

@@ -52,15 +52,11 @@ namespace LiveScore
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             ImageService
                 .Instance
-                .Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
+                .Initialize(new FFImageLoading.Config.Configuration { });
 
             MainPage = new NavigationPage(new SplashScreen());
 
             InitializeComponent();
-
-            StartEventHubs();
-
-            StartGlobalTimer();
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
@@ -92,7 +88,6 @@ namespace LiveScore
             => containerRegistry
                 .UseContainerInstance(Container)
                 .UseConfiguration(new Configuration())
-                .UseSentry()
                 .RegisterServices()
                 .RegisterNavigation();
 
@@ -101,13 +96,6 @@ namespace LiveScore
                 .AddProductModules()
                 .AddFeatureModules()
                 .Verify();
-
-        private void StartEventHubs()
-        {
-            soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
-
-            soccerHub.Start();
-        }
 
         protected override void OnSleep()
         {
@@ -127,20 +115,6 @@ namespace LiveScore
             base.OnResume();
 
             await Task.Run(async () => await soccerHub.ReConnect());
-        }
-
-        private void StartGlobalTimer(int intervalMinutes = 1)
-        {
-            Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
-            {
-                if (networkConnectionManager.IsSuccessfulConnection())
-                {
-                    var eventAggregator = Container.Resolve<IEventAggregator>();
-                    eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();
-                }
-
-                return true;
-            });
         }
     }
 }
