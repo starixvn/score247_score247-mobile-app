@@ -24,21 +24,21 @@
             <OnPlatform x:Key="RobotoRegular"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoRegular.ttf#Roboto Regular" />
+                    Value="fonts/Roboto-Regular.ttf#Roboto Regular" />
                 <On Platform="iOS"
                     Value="Roboto-Regular" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoMedium"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoMedium.ttf#Roboto Medium" />
+                    Value="fonts/Roboto-Medium.ttf#Roboto Medium" />
                 <On Platform="iOS"
                     Value="Roboto-Medium" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoBold"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoBold.ttf#Roboto Bold" />
+                    Value="fonts/Roboto-Bold.ttf#Roboto Bold" />
                 <On Platform="iOS"
                     Value="Roboto-Bold" />
             </OnPlatform>
@@ -169,7 +169,7 @@
             <x:Double x:Key="SubstitutionIconWidthSize">16</x:Double>
             <x:Double x:Key="SubstitutionShirtNumberWidthSize">30</x:Double>
             <x:Double x:Key="LineupIconWidthSize">57</x:Double>
-            
+
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="FirstPositiveOutcomeColor">#01C851</Color>
             <Color x:Key="SecondPositiveOutcomeColor">#33B5E7</Color>

@@ -59,6 +59,8 @@
                             IsCyclical="False"
                             IsViewReusingEnabled="False"
                             BackViewsDepth="1"
+                            MoveThresholdDistance="20"
+                            IsVerticalSwipeEnabled="False"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             ItemsSource="{Binding ScoreItemSources}"
