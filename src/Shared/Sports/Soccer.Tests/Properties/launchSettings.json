@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Soccer.Tests": {
-      "commandName": "Project",
-      "nativeDebugging": true
-    }
-  }
-}
