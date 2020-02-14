@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Score247NotificationExtensions</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.onelab.score247</string>
+	<string>com.onelab.score247.notification</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleInfoDictionaryVersion</key>

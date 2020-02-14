@@ -59,23 +59,7 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-<<<<<<< Updated upstream
-        /// <summary>
-        ///   Looks up a localized string similar to About Score247.
-        /// </summary>
-        public static string AboutScore247 {
-            get {
-                return ResourceManager.GetString("AboutScore247", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Added to My Favorites &amp; Subscribed push notifications..
-        /// </summary>
-        public static string AddedFavorite {
-=======
         public static string Leagues {
->>>>>>> Stashed changes
             get {
                 return ResourceManager.GetString("Leagues", resourceCulture);
             }
@@ -1128,6 +1112,12 @@ namespace LiveScore.Common.LangResources {
         public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        public static string AboutScore247 {
+            get {
+                return ResourceManager.GetString("AboutScore247", resourceCulture);
             }
         }
     }
