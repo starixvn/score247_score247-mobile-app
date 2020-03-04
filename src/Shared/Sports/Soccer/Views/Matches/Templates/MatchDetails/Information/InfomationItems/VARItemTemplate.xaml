@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              x:DataType="viewModels:SubstitutionItemViewModel"
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information.InfomationItems.VARItemTemplate">
+    <ViewCell>
+        <Grid BackgroundColor="{Binding RowColor}"
+              Style="{StaticResource MatchDetailInfoRow}">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailInfoViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
+                   Style="{StaticResource MatchInfoMinutes}"
+                   Text="{Binding MatchTime}" />
+
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="1"
+                                           AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding VisibleHomeImage}"
+                                           Source="{Binding ImageSource}"
+                                           Style="{StaticResource MatchInfoImage}" />
+            <Label Grid.Row="0"
+                   Grid.Column="2"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}"
+                   HorizontalTextAlignment="End"
+                   Style="{StaticResource MatchInfoMainPlayer}"
+                   Text="{Binding HomeOutcome}" />
+
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                   IsVisible="{Binding VisibleScore}"
+                   Style="{StaticResource MatchInfoScore}"
+                   Text="{Binding Score}" />
+
+            <Label Grid.Row="0"
+                   Grid.Column="4"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
+                   Style="{StaticResource MatchInfoMainPlayer}"
+                   Text="{Binding AwayOutcome}" />
+
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="5"
+                                           AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding VisibleAwayImage}"
+                                           Source="{Binding ImageSource}"
+                                           Style="{StaticResource MatchInfoImage}" />
+            <BoxView Grid.Row="1"
+                     Grid.ColumnSpan="6"
+                     Style="{StaticResource HorizontalLine}" />
+        </Grid>
+    </ViewCell>
+</DataTemplate>

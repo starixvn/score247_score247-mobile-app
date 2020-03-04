@@ -24,7 +24,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
             { EventType.PeriodStart, typeof(MainEventItemViewModel) },
             { EventType.MatchEnded, typeof(MainEventItemViewModel) },
             { EventType.PenaltyShootout, typeof(PenaltyShootOutViewModel) },
-            { EventType.Substitution, typeof(SubstitutionItemViewModel) }
+            { EventType.Substitution, typeof(SubstitutionItemViewModel) },
+            { EventType.VideoAssistantRefereeOver, typeof(VARItemViewModel) }
         };
 
         private static readonly IDictionary<EventType, DataTemplate> TemplateMapper = new Dictionary<EventType, DataTemplate>
@@ -38,7 +39,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
             { EventType.MatchEnded, new MainEventItemTemplate() },
             { EventType.ScoreChange, new ScoreChangeItemTemplate() },
             { EventType.PenaltyShootout, new PenaltyShootOutTemplate() },
-            { EventType.Substitution, new SubstitutionItemTemplate() }
+            { EventType.Substitution, new SubstitutionItemTemplate() },
+            { EventType.VideoAssistantRefereeOver, new VARItemTemplate() }
         };
 
         public BaseItemViewModel(

@@ -14,7 +14,8 @@ namespace LiveScore.Soccer.Models.TimelineImages
             { EventType.Substitution, Enumerations.Images.Substitution.Value },
             { EventType.ScoreChangeByOwnGoal, Enumerations.Images.ScoreChangeByOwnGoal.Value },
             { EventType.SubstitutionIn, Enumerations.Images.SubstitutionIn.Value },
-            { EventType.SubstitutionOut, Enumerations.Images.SubstitutionOut.Value }
+            { EventType.SubstitutionOut, Enumerations.Images.SubstitutionOut.Value },
+            { EventType.VideoAssistantRefereeOver, Enumerations.Images.SubstitutionOut.Value }
         };
 
         public string BuildImageSource(TimelineEventImage timelineEvent)

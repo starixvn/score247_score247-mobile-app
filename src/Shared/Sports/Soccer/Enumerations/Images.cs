@@ -24,6 +24,7 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
         public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
         public static readonly Images ScoreChangeByOwnGoal = new Images("images/common/own_goal_substitution.svg", nameof(ScoreChangeByOwnGoal));
+        public static readonly Images Var = new Images("images/common/var.svg", nameof(Var));
 
         public Images()
         {

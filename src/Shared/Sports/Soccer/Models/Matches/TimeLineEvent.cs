@@ -62,6 +62,10 @@ namespace LiveScore.Soccer.Models.Matches
 
         public Player PlayerOut { get; set; }
 
+        public OutcomeType Outcome { get; set; }
+
+        public DescriptionType Description { get; set; }
+
         public override bool Equals(object obj)
         {
             if (!(obj is TimelineEvent actualObj))
