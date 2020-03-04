@@ -1126,6 +1126,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Privacy and Cookies.
+        /// </summary>
+        public static string PrivacyAndCookies {
+            get {
+                return ResourceManager.GetString("PrivacyAndCookies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not seeing the leagues you want?.
         /// </summary>
         public static string Question1 {

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LiveScore.Features.Menu.Views.PrivacyAndCookiesView"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+             xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModel:PrivacyAndCookiesViewModel"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <NavigationPage.TitleView>
+        <Label Text="{languages:Translate PrivacyAndCookies}" Style="{StaticResource MenuTitle}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding DoneCommand}"
+                     Order="Primary"
+                     Priority="1"
+                     Text="Done" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:MenuResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="This is Privacy!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

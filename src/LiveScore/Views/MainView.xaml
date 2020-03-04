@@ -114,6 +114,21 @@
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout x:Name="PrivacyAndCookies"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe92d;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="{languages:Translate PrivacyAndCookies}" />
+                        </StackLayout>
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="PrivacyAndCookiesView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout x:Name="Version"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">

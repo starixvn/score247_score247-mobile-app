@@ -101,6 +101,10 @@ namespace LiveScore.ViewModels
             {
                 await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new SelectLanguageView());
             }
+            else if (page == nameof(PrivacyAndCookiesView))
+            {
+                await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new PrivacyAndCookiesView());
+            }
         }
 
         private static async Task ShareApp()

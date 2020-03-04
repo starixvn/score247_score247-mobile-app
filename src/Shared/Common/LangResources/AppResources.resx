@@ -633,4 +633,7 @@
   <data name="GMT" xml:space="preserve">
     <value>GMT{0}</value>
   </data>
+  <data name="PrivacyAndCookies" xml:space="preserve">
+    <value>Privacy and Cookies</value>
+  </data>
 </root>
