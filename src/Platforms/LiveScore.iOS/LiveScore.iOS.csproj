@@ -882,10 +882,15 @@
       <Link>Resources\images\common\logo.svg</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\var.svg">
+      <Link>Resources\images\common\var.svg</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
