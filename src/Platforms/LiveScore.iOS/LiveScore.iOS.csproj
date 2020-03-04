@@ -440,6 +440,7 @@
       <IsAppExtension>true</IsAppExtension>
       <Project>{01B4DC28-530F-485C-92B2-395C4A9A5FFF}</Project>
       <Name>LiveScore.iOS.NotificationServiceExtension</Name>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -895,7 +896,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
