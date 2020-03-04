@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Com.OneSignal;
 using Fanex.Caching;
 using FFImageLoading.Helpers;
 using LiveScore.Common;
@@ -80,6 +81,7 @@ namespace LiveScore.Configurations
             }
 
             AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes), typeof(Push));
+            OneSignal.Current.StartInit("e7988708-b94d-4177-962d-ee23999ba9c1").EndInit();
 
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
