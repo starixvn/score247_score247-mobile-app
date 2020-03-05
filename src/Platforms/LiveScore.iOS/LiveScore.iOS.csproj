@@ -32,13 +32,12 @@
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
-    <MtouchProfiling>true</MtouchProfiling>
     <CodesignProvision>Score247.Development</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
     <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
-    <MtouchExtraArgs>--optimize=experimental-xforms-product-type--registrar:static</MtouchExtraArgs>
+    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
