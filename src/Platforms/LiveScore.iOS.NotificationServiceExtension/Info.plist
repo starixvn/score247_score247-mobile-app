@@ -14,10 +14,6 @@
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.9.9</string>
-	<key>CFBundleVersion</key>
-	<string>1.9.9</string>
 	<key>MinimumOSVersion</key>
 	<string>11.0</string>
 	<key>NSExtension</key>
@@ -27,5 +23,9 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>NotificationService</string>
 	</dict>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.5</string>
+	<key>CFBundleVersion</key>
+	<string>199</string>
 </dict>
 </plist>

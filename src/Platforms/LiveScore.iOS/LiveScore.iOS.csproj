@@ -63,7 +63,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>Apple Development: Doan Nhat Phuong (H8V2B3BTNV)</CodesignKey>
+    <CodesignKey>Apple Development: Score247 Nex (77CJMQ457X)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>Score247.Development</CodesignProvision>
     <MtouchLink>None</MtouchLink>
@@ -200,7 +200,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <CodesignProvision>Score247.Development</CodesignProvision>
-    <CodesignKey>Apple Development: Doan Nhat Phuong (H8V2B3BTNV)</CodesignKey>
+    <CodesignKey>Apple Development: Score247 Nex (77CJMQ457X)</CodesignKey>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchFloat32>false</MtouchFloat32>
