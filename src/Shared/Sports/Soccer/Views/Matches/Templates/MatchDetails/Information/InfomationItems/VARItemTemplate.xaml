@@ -4,7 +4,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              x:DataType="viewModels:SubstitutionItemViewModel"
+              x:DataType="viewModels:VARItemViewModel"
               x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information.InfomationItems.VARItemTemplate">
     <ViewCell>
         <Grid BackgroundColor="{Binding RowColor}"
