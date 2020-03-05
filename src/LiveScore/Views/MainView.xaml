@@ -118,7 +118,7 @@
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
-                                   Text="&#xe92d;" />
+                                   Text="&#xe930;" />
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate PrivacyAndCookies}" />
                         </StackLayout>

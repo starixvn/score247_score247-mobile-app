@@ -73,12 +73,12 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout x:DataType="viewModels:LineupsGroupViewModel"
-                                         CompressedLayout.IsHeadless="true">
-                                <BoxView Style="{StaticResource HorizontalLine}" />
+                                         CompressedLayout.IsHeadless="true">                                
                                 <FlexLayout Style="{StaticResource Group}">
                                     <Label Style="{StaticResource GroupName}"
                                            Text="{Binding Name}" />
                                 </FlexLayout>
+                                <BoxView Style="{StaticResource HorizontalLine}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
