@@ -1,6 +1,7 @@
 ﻿using LiveScore.Core;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.TimelineImages;
 using Prism.Navigation;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
@@ -22,6 +23,15 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
         public override BaseItemViewModel BuildData()
         {
             base.BuildData();
+            if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type.DisplayName))
+            {
+                var imageSource = ImageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent.Type));
+
+                if (!string.IsNullOrEmpty(imageSource))
+                {
+                    ImageSource = imageSource;
+                }
+            }
 
             if (TimelineEvent.OfHomeTeam())
             {
