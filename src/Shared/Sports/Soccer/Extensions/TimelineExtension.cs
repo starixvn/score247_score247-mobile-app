@@ -16,7 +16,8 @@ namespace LiveScore.Soccer.Extensions
             EventType.PenaltyShootout,
             EventType.BreakStart,
             EventType.MatchEnded,
-            EventType.Substitution
+            EventType.Substitution,
+            EventType.VarOver
         };
 
         public static readonly EventType[] HighlightSoccerEventTypes = {
@@ -25,7 +26,8 @@ namespace LiveScore.Soccer.Extensions
                 EventType.YellowCard,
                 EventType.RedCard,
                 EventType.YellowRedCard,
-                EventType.Substitution
+                EventType.Substitution,
+                EventType.VarOver
             };
 
         public static bool IsHalfTimeBreak(this TimelineEvent timeline)

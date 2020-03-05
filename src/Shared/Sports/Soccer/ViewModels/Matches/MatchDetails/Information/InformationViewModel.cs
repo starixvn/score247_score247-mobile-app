@@ -7,6 +7,7 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Soccer.Extensions;

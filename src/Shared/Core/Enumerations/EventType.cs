@@ -42,59 +42,61 @@
         //yellow_red_card
         public static readonly EventType YellowRedCard = new EventType(12, "yellow_red_card");
 
-        //cancelled_video_assistant_referee
-        public static readonly EventType CancelledVideoAssistantReferee = new EventType(13, "cancelled_video_assistant_referee");
-
-        //corner_kick
-        public static readonly EventType CornerKick = new EventType(14, "corner_kick");
-
-        //free_kick
-        public static readonly EventType FreeKick = new EventType(15, "free_kick");
-
-        //goal_kick
-        public static readonly EventType GoalKick = new EventType(16, "goal_kick");
-
-        //injury
-        public static readonly EventType Injury = new EventType(17, "injury");
-
-        //injury_return
-        public static readonly EventType InjuryReturn = new EventType(18, "injury_return");
-
-        //shot_off_target
-        public static readonly EventType ShotOffTarget = new EventType(19, "shot_off_target");
-
-        //shot_on_target
-        public static readonly EventType ShotOnTarget = new EventType(20, "shot_on_target");
-
-        //shot_saved
-        public static readonly EventType ShotSaved = new EventType(21, "shot_saved");
-
-        //throw_in
-        public static readonly EventType ThrowIn = new EventType(22, "throw_in");
-
-        //video_assistant_referee
-        public static readonly EventType VideoAssistantReferee = new EventType(23, "video_assistant_referee");
-
-        //video_assistant_referee_over
-        public static readonly EventType VideoAssistantRefereeOver = new EventType(24, "video_assistant_referee_over");
+        //period_score
+        public static readonly EventType PeriodScore = new EventType(13, "period_score");
 
         //possible_video_assistant_referee
-        public static readonly EventType PossibleVideoAssistantReferee = new EventType(25, "possible_video_assistant_referee");
+        public static readonly EventType PossibleVar = new EventType(14, "possible_video_assistant_referee");
+
+        //shot_off_target
+        public static readonly EventType ShotOffTarget = new EventType(15, "shot_off_target");
+
+        //shot_on_target
+        public static readonly EventType ShotOnTarget = new EventType(16, "shot_on_target");
+
+        //shot_saved
+        public static readonly EventType ShotSaved = new EventType(17, "shot_saved");
 
         //offside
-        public static readonly EventType Offside = new EventType(26, "offside");
+        public static readonly EventType Offside = new EventType(18, "offside");
 
         //penalty_awarded
-        public static readonly EventType PenaltyAwarded = new EventType(27, "penalty_awarded");
+        public static readonly EventType PenaltyAwarded = new EventType(19, "penalty_awarded");
 
-        //period_score
-        public static readonly EventType PeriodScore = new EventType(28, "period_score");
+        //cancelled_video_assistant_referee
+        public static readonly EventType CancelledVar = new EventType(20, "cancelled_video_assistant_referee");
+
+        //corner_kick
+        public static readonly EventType CornerKick = new EventType(21, "corner_kick");
+
+        //free_kick
+        public static readonly EventType FreeKick = new EventType(22, "free_kick");
+
+        //goal_kick
+        public static readonly EventType GoalKick = new EventType(23, "goal_kick");
+
+        //injury
+        public static readonly EventType Injury = new EventType(24, "injury");
+
+        //injury_return
+        public static readonly EventType InjuryReturn = new EventType(25, "injury_return");
+
+        //throw_in
+        public static readonly EventType ThrowIn = new EventType(26, "throw_in");
+
+        //video_assistant_referee
+        public static readonly EventType Var = new EventType(27, "video_assistant_referee");
+
+        //video_assistant_referee_over
+        public static readonly EventType VarOver = new EventType(28, "video_assistant_referee_over");
 
         // custom event
         public static readonly EventType ScoreChangeByPenalty = new EventType(29, "score_change_by_penalty");
 
         public static readonly EventType ScoreChangeByOwnGoal = new EventType(30, "score_change_by_owngoal");
+
         public static readonly EventType SubstitutionIn = new EventType(31, "substitution_in");
+
         public static readonly EventType SubstitutionOut = new EventType(32, "substitution_out");
 
         public EventType()
@@ -135,7 +137,7 @@
             { EventType.Substitution, "Substitution" },
             { EventType.YellowCard, "Yellow card" },
             { EventType.YellowRedCard, "Yellow red card" },
-            { EventType.CancelledVideoAssistantReferee, "Cancelled video assistant referee" },
+            { EventType.CancelledVar, "Cancelled video assistant referee" },
             { EventType.CornerKick, "Corner kick" },
             { EventType.FreeKick, "Free kick" },
             { EventType.GoalKick, "Goal kick" },
@@ -145,9 +147,9 @@
             { EventType.ShotOnTarget, "Shot on target" },
             { EventType.ShotSaved, "Shot saved" },
             { EventType.ThrowIn, "Throw in" },
-            { EventType.VideoAssistantReferee, "Video assistant referee" },
-            { EventType.VideoAssistantRefereeOver, "Video assistant referee over" },
-            { EventType.PossibleVideoAssistantReferee, "Possible video assistant referee" },
+            { EventType.Var, "Video assistant referee" },
+            { EventType.VarOver, "Video assistant referee over" },
+            { EventType.PossibleVar, "Possible video assistant referee" },
             { EventType.Offside, "Off side" },
             { EventType.PenaltyAwarded, "Penalty awarded" },
             { EventType.PeriodScore, "Period score" }
