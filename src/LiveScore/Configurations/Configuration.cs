@@ -15,6 +15,8 @@ namespace LiveScore.Configurations
         public bool Debug => true;
         public string EncryptKey => "e6e42fa2cd8db55e10c2b7b4833e0f8e";
 
+        public string OneSignalAppId => "e7988708-b94d-4177-962d-ee23999ba9c1";
+
 #elif TEST
         public string ApiEndPoint => "https://score247-api1.nexdev.net/test/api";
         public string ImageEndPoint => "https://score247-api1.nexdev.net/test/news/images";
@@ -25,6 +27,7 @@ namespace LiveScore.Configurations
         public string Environment => "Local";
         public bool Debug => true;
         public string EncryptKey => "e6e42fa2cd8db55e10c2b7b4833e0f8e";
+        public string OneSignalAppId => "e7988708-b94d-4177-962d-ee23999ba9c1";
 
         //DataGenerator: http://ha.nexdev.net:7208/test
 #elif LocalRelease
@@ -37,6 +40,7 @@ namespace LiveScore.Configurations
         public string Environment => "Local";
         public bool Debug => true;
         public string EncryptKey => "350cd642f6764a154a9e4f03eb3121b6";
+        public string OneSignalAppId => "e7988708-b94d-4177-962d-ee23999ba9c1";
 
 #else
 
@@ -49,6 +53,7 @@ namespace LiveScore.Configurations
         public string Environment => "Testflight";
         public bool Debug => false;
         public string EncryptKey => "350cd642f6764a154a9e4f03eb3121b6";
+        public string OneSignalAppId => "e7988708-b94d-4177-962d-ee23999ba9c1";
 
 #endif
     }

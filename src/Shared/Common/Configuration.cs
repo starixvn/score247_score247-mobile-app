@@ -19,5 +19,7 @@
         bool Debug { get; }
 
         string EncryptKey { get; }
+
+        string OneSignalAppId { get; }
     }
 }
