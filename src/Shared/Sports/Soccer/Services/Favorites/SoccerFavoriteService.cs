@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -37,6 +38,8 @@ namespace LiveScore.Soccer.Services.Favorites
         {
             try
             {
+                Debug.WriteLine("SyncToServer");
+
                 userId = await GetUserIdAsync();
                 var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, addedFavorites), new UserFavorite(userId, removedFavorites));
 
@@ -64,7 +67,7 @@ namespace LiveScore.Soccer.Services.Favorites
 
                 if (generatedUserId == null)
                 {
-                    throw new ArgumentNullException("UserId", "Cannot generate InstallId from AppCenter");
+                    throw new ArgumentNullException("UserId", "Cannot generate UserId");
                 }
 
                 return generatedUserId;

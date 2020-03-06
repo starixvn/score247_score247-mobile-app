@@ -36,8 +36,7 @@ namespace LiveScore
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor.
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
-        public bool IsInBackground;
+         */      
         private INetworkConnection networkConnectionManager;
         private IHubService soccerHub;
         private DateTime appSleepTime;
@@ -132,7 +131,6 @@ namespace LiveScore
             {
                 base.OnSleep();
 
-                IsInBackground = true;
                 appSleepTime = DateTime.Now;
 
                 await soccerHub.Stop();
@@ -148,7 +146,6 @@ namespace LiveScore
             try
             {
                 base.OnResume();
-                IsInBackground = false;
 
                 if (soccerHub == null)
                 {

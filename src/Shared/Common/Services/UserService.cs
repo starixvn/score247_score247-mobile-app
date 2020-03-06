@@ -23,26 +23,30 @@ namespace LiveScore.Common.Services
 
         [Time]
         public Task<string> GetOrCreateUserIdAsync()
-        => Task.Run(() => {
-                var userId = userSettingService.GetValueOrDefault(UserIdKey, default(string));
+        => Task.Run(() =>
+        {
 
-                if (userId == default)
+            Debug.WriteLine("GetOrCreateUserIdAsync");
+
+            var userId = userSettingService.GetValueOrDefault(UserIdKey, default(string));
+
+            if (userId == default)
+            {
+
+                OneSignal.Current.IdsAvailable((playerID, pushToken) =>
                 {
+                    userId = playerID;
 
-                    OneSignal.Current.IdsAvailable((playerID, pushToken) =>
-                    {
-                        userId = playerID;
-
-                        userSettingService.AddOrUpdateValue(UserIdKey, userId);
-                    });
+                    userSettingService.AddOrUpdateValue(UserIdKey, userId);
+                });
 
 
-                }
+            }
 
-                Debug.WriteLine($"OneSignalUserId {userId}");
+            Debug.WriteLine($"OneSignalUserId {userId}");
 
-                return userId;
-            });
-        
+            return userId;
+        });
+
     }
 }
