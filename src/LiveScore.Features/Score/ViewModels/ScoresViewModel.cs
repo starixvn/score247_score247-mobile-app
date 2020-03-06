@@ -30,6 +30,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
+            OpenSearchTeamCommand = new DelegateAsyncCommand(OpenPopupSearchTeam);
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             InitScoreItemSources();
         }
@@ -45,6 +46,8 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateCommand<ItemDisappearingEventArgs> ScoreItemDisappearingCommand { get; }
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
+
+        public DelegateAsyncCommand OpenSearchTeamCommand { get; }
 
         public override async void OnResumeWhenNetworkOK()
         {
@@ -159,6 +162,11 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        private async Task OpenPopupSearchTeam()
+        {
+            await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView", useModalNavigation: true, animated: false);
         }
     }
 }

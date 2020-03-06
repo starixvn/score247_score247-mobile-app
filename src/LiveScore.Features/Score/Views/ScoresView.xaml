@@ -14,7 +14,8 @@
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+        <ToolbarItem IconImageSource="images/common/search.png"
+                     Command="{Binding OpenSearchTeamCommand}"
                      Priority="1"
                      Text="Search" />
     </ContentPage.ToolbarItems>

@@ -52,7 +52,7 @@
     <ContentPage.Content>
         <StackLayout Opacity="0"
                      x:Name="SearchView">
-            
+
             <ListView Style="{StaticResource ListViewHasBackground}"
                       ItemsSource="{Binding TeamsItemSource}"
                       HasUnevenRows="True"
@@ -80,9 +80,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid  xamEffects:TouchEffect.Color="Gray"
-                                   xamEffects:Commands.Tap="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
-                                   xamEffects:Commands.TapParameter="{Binding .}">
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                                     <RowDefinition Height="1" />
@@ -100,6 +98,7 @@
                                                        Style="{StaticResource CountryFlag}" />
                                 <Label Grid.Row="0"
                                        Grid.Column="1"
+                                       xamEffects:TouchEffect.Color="Gray"
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="CenterAndExpand"
                                        Style="{StaticResource LeagueName}"
@@ -107,6 +106,8 @@
                                 <Button Grid.Row="0"
                                         Grid.Column="2"
                                         x:Name="favoriteButton"
+                                        Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
+                                        CommandParameter="{Binding .}"
                                         Style="{StaticResource InActiveFavoriteIcon}">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button"

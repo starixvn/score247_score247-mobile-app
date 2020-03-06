@@ -15,7 +15,7 @@
         public static readonly DescriptionType RedCard = new DescriptionType(3, "red_card");
 
         //VAR Call Stage
-        public static readonly DescriptionType CallStaged = new DescriptionType(4, "call_staged");
+        public static readonly DescriptionType CallStaged = new DescriptionType(4, "call_stands");
 
         //VAR Call Overturned
         public static readonly DescriptionType CallOverturned = new DescriptionType(5, "call_overturned");
