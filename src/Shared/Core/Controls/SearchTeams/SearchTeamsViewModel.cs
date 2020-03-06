@@ -27,6 +27,7 @@ namespace LiveScore.Core.Controls.SearchTeams
             CancelSearchCommand = new DelegateAsyncCommand(OnCancelSearch);
             SearchTeamCommand = new DelegateAsyncCommand<string>(OnSearchTeam);
             FavoriteCommand = new DelegateAsyncCommand<ITeamProfile>(OnFavoriteTeam);
+            OpenTeamDetailCommand = new DelegateAsyncCommand<ITeamProfile>(OnTapTeam);
             buildTeamLogoUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildTeamLogoUrlFuncName);
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
@@ -56,6 +57,8 @@ namespace LiveScore.Core.Controls.SearchTeams
         public DelegateAsyncCommand<string> SearchTeamCommand { get; }
 
         public DelegateAsyncCommand<ITeamProfile> FavoriteCommand { get; }
+
+        public DelegateAsyncCommand<ITeamProfile> OpenTeamDetailCommand { get; }
 
         public IReadOnlyCollection<ITeamProfile> TeamsItemSource { get; private set; }
 
@@ -125,6 +128,16 @@ namespace LiveScore.Core.Controls.SearchTeams
             });
 
             TeamsItemSource = teamList;
+        }
+
+        private async Task OnTapTeam(ITeamProfile team)
+        {
+            await NavigationService.NavigateAsync(
+                "FavoriteTeamMatchesView",
+                new NavigationParameters
+                {
+                    {"Team", team}
+                });
         }
     }
 }

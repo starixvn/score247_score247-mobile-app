@@ -98,7 +98,8 @@
                                                        Style="{StaticResource CountryFlag}" />
                                 <Label Grid.Row="0"
                                        Grid.Column="1"
-                                       xamEffects:TouchEffect.Color="Gray"
+                                       xamEffects:Commands.Tap="{Binding Path=BindingContext.OpenTeamDetailCommand, Source={x:Reference Name=self}}"
+                                       xamEffects:Commands.TapParameter="{Binding .}"
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="CenterAndExpand"
                                        Style="{StaticResource LeagueName}"
