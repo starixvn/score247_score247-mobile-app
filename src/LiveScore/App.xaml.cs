@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
+using Com.OneSignal;
+using Com.OneSignal.Abstractions;
 using FFImageLoading;
 using FFImageLoading.Helpers;
+using LiveScore.Common;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Configurations;
@@ -11,9 +15,7 @@ using LiveScore.Core.Events;
 using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.Services;
-using LiveScore.Core.Views;
 using LiveScore.Views;
-using Microsoft.AppCenter.Push;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -21,7 +23,6 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
-using Rg.Plugins.Popup.Contracts;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -67,7 +68,27 @@ namespace LiveScore
             networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
             loggingService = Container.Resolve<ILoggingService>();
-            HandlePushNotification();
+            var configuration = Container.Resolve<IConfiguration>();
+
+            OneSignal.Current
+                .StartInit(configuration.OneSignalAppId)
+                .InFocusDisplaying(OSInFocusDisplayOption.Notification)
+                .HandleNotificationOpened((result) =>
+                {
+                    Debug.WriteLine("HandleNotificationOpened");
+
+                    var notificationMessage = new NotificationMessage(
+                            result.notification.payload.additionalData["SportId"].ToString(),
+                            result.notification.payload.additionalData["id"].ToString(),
+                            result.notification.payload.additionalData["type"].ToString(),
+                            result.notification.payload.title,
+                            result.notification.payload.body);
+
+
+                    HandlePushNotification(notificationMessage);
+                })
+                .EndInit();
+            
         }
 
         protected override void ConfigureViewModelLocator()
@@ -168,49 +189,22 @@ namespace LiveScore
             });
         }
 
-        private void HandlePushNotification()
+        private void HandlePushNotification(NotificationMessage notificationMessage)
         {
             var eventAggregator = Container.Resolve<IEventAggregator>();
-            var popupNavigation = Container.Resolve<IPopupNavigation>();
 
-            Push.PushNotificationReceived += async (sender, message) =>
+            isResumeWithNotification = true;
+
+            if (NeedToRestartApp())
             {
-                var notificationMessage = new NotificationMessage(
-                      message.CustomData["SportId"],
-                      message.CustomData["id"],
-                      message.CustomData["type"],
-                      message.Title,
-                      message.Message);
-
-                if (IsInBackground)
-                {
-                    isResumeWithNotification = true;
-
-                    if (NeedToRestartApp())
-                    {
-                        SetMainPage(notificationMessage);
-                    }
-                    else
-                    {
-                        eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
-                    }
-                }
-                else
-                {
-                    var notificationPopupView = new NotificationPopupView(notificationMessage, eventAggregator);
-
-                    if (popupNavigation.PopupStack.Count > 0)
-                    {
-                        await Task.Delay(2000).ContinueWith(async _ => await popupNavigation.PushAsync(notificationPopupView));
-                    }
-                    else
-                    {
-                        await popupNavigation.PushAsync(notificationPopupView);
-                    }
-                }
-            };
+                SetMainPage(notificationMessage);
+            }
+            else
+            {
+                eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
+            }
         }
 
-        private bool NeedToRestartApp() => DateTime.Now - appSleepTime > TimeSpan.FromMinutes(30);
+        private bool NeedToRestartApp() => appSleepTime != default && DateTime.Now - appSleepTime > TimeSpan.FromMinutes(30);
     }
 }

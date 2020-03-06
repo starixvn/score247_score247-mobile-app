@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
-using Com.OneSignal;
+using DryIoc;
 using Fanex.Caching;
 using FFImageLoading.Helpers;
 using LiveScore.Common;
@@ -24,7 +23,6 @@ using MessagePack.Resolvers;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter.Push;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -81,8 +79,7 @@ namespace LiveScore.Configurations
                 throw new ArgumentNullException($"{nameof(Configuration)} is null. Please call {nameof(UseConfiguration)}");
             }
 
-            AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes), typeof(Push));
-            OneSignal.Current.StartInit(Configuration.OneSignalAppId).EndInit();
+            AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
 
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();

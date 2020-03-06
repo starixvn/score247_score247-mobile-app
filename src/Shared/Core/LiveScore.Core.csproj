@@ -40,6 +40,8 @@
       <None Remove="Triggers\**" />
       <None Remove="ViewModels\Leagues\**" />
       <None Remove="Views\Selectors\**" />
+      <EmbeddedResource Remove="Views\NotificationPopupView.xaml" />
+      <Compile Remove="Views\NotificationPopupView.xaml.cs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="AsyncErrorHandler.Fody" Version="1.3.0" />
@@ -94,9 +96,6 @@
       </Compile>
       <Compile Update="ViewResources\PopupViewResource.xaml.cs">
         <DependentUpon>PopupViewResource.xaml</DependentUpon>
-      </Compile>
-      <Compile Update="Views\NotificationPopupView.xaml.cs">
-        <DependentUpon>NotificationPopupView.xaml</DependentUpon>
       </Compile>
       <Compile Update="Views\NetworkConnectionErrorPopupView.xaml.cs">
         <DependentUpon>NetworkConnectionErrorPopupView.xaml</DependentUpon>
