@@ -5,6 +5,7 @@ using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Services;
+using MethodTimer;
 
 namespace LiveScore.Soccer.Services.Favorites
 {
@@ -31,6 +32,7 @@ namespace LiveScore.Soccer.Services.Favorites
             SyncFunc = SyncToServer;
         }
 
+        [Time]
         private async Task<bool> SyncToServer(IList<Favorite> addedFavorites, IList<Favorite> removedFavorites)
         {
             try

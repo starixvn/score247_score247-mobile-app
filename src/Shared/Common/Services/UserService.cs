@@ -1,17 +1,19 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AppCenter;
+using Com.OneSignal;
+using MethodTimer;
 
 namespace LiveScore.Common.Services
 {
     public interface IUserService
     {
-        Task<Guid?> GetOrCreateUserIdAsync();
+        Task<string> GetOrCreateUserIdAsync();
     }
 
     public class UserService : IUserService
     {
-        private const string USER_ID_KEY = "UserId";
+        private const string UserIdKey = "UserId";
+
         private readonly IUserSettingService userSettingService;
 
         public UserService(IUserSettingService userSettingService)
@@ -19,18 +21,28 @@ namespace LiveScore.Common.Services
             this.userSettingService = userSettingService;
         }
 
-        public async Task<Guid?> GetOrCreateUserIdAsync()
-        {
-            var userId = userSettingService.GetValueOrDefault(USER_ID_KEY, default(Guid));
+        [Time]
+        public Task<string> GetOrCreateUserIdAsync()
+        => Task.Run(() => {
+                var userId = userSettingService.GetValueOrDefault(UserIdKey, default(string));
 
-            if (userId == default)
-            {
-                userId = await AppCenter.GetInstallIdAsync() ?? default;
-            }
+                if (userId == default)
+                {
 
-            userSettingService.AddOrUpdateValue(USER_ID_KEY, userId);
+                    OneSignal.Current.IdsAvailable((playerID, pushToken) =>
+                    {
+                        userId = playerID;
 
-            return userId;
-        }
+                        userSettingService.AddOrUpdateValue(UserIdKey, userId);
+                    });
+
+
+                }
+
+                Debug.WriteLine($"OneSignalUserId {userId}");
+
+                return userId;
+            });
+        
     }
 }

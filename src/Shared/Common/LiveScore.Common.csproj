@@ -69,6 +69,7 @@
     <PackageReference Include="Xamarin.Forms.Skeleton" Version="1.0.0" />
     <PackageReference Include="akavache" Version="6.9.10" />
     <PackageReference Include="XamEffects" Version="1.6.3" />
+    <PackageReference Include="Com.OneSignal" Version="3.7.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Converters\InverseBoolConverter.cs" />

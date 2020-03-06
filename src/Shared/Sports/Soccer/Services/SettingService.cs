@@ -55,11 +55,11 @@ namespace LiveScore.Soccer.Services
             userSettingService.AddOrUpdateValue(NotificationCacheKey, notificationStatus);
         }
 
-        private async Task<bool> SendUpdateNotificationStatus(bool isEnable, Guid? userId)
+        private async Task<bool> SendUpdateNotificationStatus(bool isEnable, string userId)
         {
             try
             {
-                var result = await settingsApi.UpdateNotificationStatus(Language.English.DisplayName, userId?.ToString(), isEnable);
+                var result = await settingsApi.UpdateNotificationStatus(Language.English.DisplayName, userId, isEnable);
 
                 return result;
             }
