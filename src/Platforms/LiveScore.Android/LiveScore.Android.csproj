@@ -73,10 +73,6 @@
     <AndroidSigningStorePass>1234aa</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>ONElab</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>1234aa</AndroidSigningKeyPass>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevRelease|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
