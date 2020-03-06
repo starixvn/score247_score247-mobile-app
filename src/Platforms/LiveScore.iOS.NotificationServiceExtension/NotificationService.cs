@@ -20,9 +20,6 @@ namespace LiveScore.iOS.NotificationServiceExtension
             ContentHandler = contentHandler;
             BestAttemptContent = (UNMutableNotificationContent)request.Content.MutableCopy();
 
-            // Modify the notification content here...
-            BestAttemptContent.Title = $"{BestAttemptContent.Title}[modified]";
-
             ContentHandler(BestAttemptContent);
         }
 
