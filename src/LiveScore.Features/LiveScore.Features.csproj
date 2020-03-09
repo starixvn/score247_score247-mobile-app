@@ -96,6 +96,9 @@
     <Compile Update="League\Views\Templates\LeagueGroupTemplate.xaml.cs">
       <DependentUpon>LeagueGroupTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Menu\ViewResources\PrivacyAndCookiesViewResource.xaml.cs">
+      <DependentUpon>PrivacyAndCookiesViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Menu\ViewResources\FAQViewResource.xaml.cs">
       <DependentUpon>FAQViewResource.xaml</DependentUpon>
     </Compile>

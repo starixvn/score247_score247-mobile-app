@@ -8,7 +8,7 @@
              xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:PrivacyAndCookiesViewModel"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <Label Text="{languages:Translate PrivacyAndCookies}" Style="{StaticResource MenuTitle}" />
     </NavigationPage.TitleView>
@@ -22,14 +22,37 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <viewResources:MenuResource />
+                <viewResources:PrivacyAndCookiesViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="This is Privacy!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <Label Text="{languages:Translate CookiesPolicyScore247}" Style="{StaticResource CookiesPolicy}" />
+                <StackLayout Style="{StaticResource PrivacySection}">
+                    <Label  Style="{StaticResource PrivacyContent}" Text="{languages:Translate CookiesPolicyScore247Intro}" />
+                    <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate HowWeUseCookies}" />
+                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate HowWeUseCookiesIntro}' LineBreakMode="CharacterWrap" />
+
+                    <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate DisablingCookies}" />
+                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate DisablingCookiesIntro}' />
+
+                    <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate WhatPersonalInformationWeCollect}" />
+                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate WhatPersonalInformationWeCollectIntro}' />
+
+                    <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate HowWeUseYourInformation}" />
+                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate HowWeUseYourInformationIntro1}' />
+
+                    <Label  Style="{StaticResource PrivacyList}"Text="{languages:Translate HowWeUseYourInformationIntro2}" />
+                </StackLayout>
+                <Label Style="{StaticResource CookiesPolicy}" Text="{languages:Translate AccessAndCorrection}" />
+                <StackLayout Style="{StaticResource PrivacySection}">
+                    <Label Style="{StaticResource PrivacyContent}" Text="{languages:Translate AccessAndCorrectionIntro}" />
+                    <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate HowSecureIsYourInformation}" />
+                    <Label Style="{StaticResource PrivacyContent}" Text="{languages:Translate HowSecureIsYourInformationIntro}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

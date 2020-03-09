@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary x:Class="LiveScore.Features.Menu.ViewResources.PrivacyAndCookiesViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="CookiesPolicy"
+               TargetType="Label">
+        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
+        <Setter Property="BackgroundColor" Value="#272830" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Padding" Value="16,16" />
+        <Setter Property="FontSize" Value="{StaticResource SettingGroupFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource SettingGroupColor}" />
+    </Style>
+    <Style x:Key="PrivacyContent"
+               TargetType="Label">
+        <Setter Property="LineHeight" Value="1.2" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+        <Setter Property="FontSize" Value="{StaticResource SettingFontSize}" />
+        <Setter Property="TextColor" Value="#CBCBCB" />
+    </Style>
+    <Style x:Key="PrivacyList"
+               BasedOn="{StaticResource PrivacyContent}"
+               TargetType="Label">
+        <Setter Property="Padding" Value="12,0,0,0" />
+    </Style>
+    <Style x:Key="PrivacyGroupTitle"
+               TargetType="Label">
+        <Setter Property="Margin" Value="0,10,0,6" />
+        <Setter Property="HeightRequest" Value="32" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource SettingFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource SettingColor}" />
+    </Style>
+    <Style x:Key="PrivacySection" TargetType="StackLayout">
+        <Setter Property="Padding" Value="16,12" />
+    </Style>
+</ResourceDictionary>
