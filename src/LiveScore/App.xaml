@@ -57,6 +57,7 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
             <Color x:Key="LineColor">#3A3942</Color>
+            <Color x:Key="DetailTextColor">#CBCBCB</Color>
 
             <!-- Button -->
             <Color x:Key="CommonButtonBgColor">#3A3942</Color>

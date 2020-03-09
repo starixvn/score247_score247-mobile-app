@@ -29,11 +29,11 @@
     <ContentPage.Content>
         <ScrollView Orientation="Vertical">
             <StackLayout>
-                <Label Text="{languages:Translate CookiesPolicyScore247}" Style="{StaticResource CookiesPolicy}" />
+                <Label Style="{StaticResource CookiesPolicy}" Text="{languages:Translate CookiesPolicyScore247}" />
                 <StackLayout Style="{StaticResource PrivacySection}">
                     <Label  Style="{StaticResource PrivacyContent}" Text="{languages:Translate CookiesPolicyScore247Intro}" />
                     <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate HowWeUseCookies}" />
-                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate HowWeUseCookiesIntro}' LineBreakMode="CharacterWrap" />
+                    <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate HowWeUseCookiesIntro}' />
 
                     <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate DisablingCookies}" />
                     <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate DisablingCookiesIntro}' />
@@ -44,7 +44,7 @@
                     <Label Style="{StaticResource PrivacyGroupTitle}" Text="{languages:Translate HowWeUseYourInformation}" />
                     <Label Style="{StaticResource PrivacyContent}" Text='{languages:Translate HowWeUseYourInformationIntro1}' />
 
-                    <Label  Style="{StaticResource PrivacyList}"Text="{languages:Translate HowWeUseYourInformationIntro2}" />
+                    <Label  Style="{StaticResource PrivacyList}" Text="{languages:Translate HowWeUseYourInformationIntro2}" />
                 </StackLayout>
                 <Label Style="{StaticResource CookiesPolicy}" Text="{languages:Translate AccessAndCorrection}" />
                 <StackLayout Style="{StaticResource PrivacySection}">

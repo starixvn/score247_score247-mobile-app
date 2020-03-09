@@ -80,7 +80,7 @@
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="TextColor"
-                Value="#CBCBCB" />
+                Value="{StaticResource DetailTextColor}" />
     </Style>
 
     <Style x:Key="NewsDetailAuthor"
@@ -100,7 +100,7 @@
         <Setter Property="HorizontalOptions"
                 Value="EndAndExpand" />
         <Setter Property="TextColor"
-                Value="#CBCBCB" />
+                Value="{StaticResource DetailTextColor}" />
         <Setter Property="FontSize"
                 Value="12" />
         <Setter Property="FontFamily"
@@ -109,7 +109,7 @@
 
     <Style x:Key="NewsDetailSourceLayout"
            TargetType="StackLayout">
-        <Setter Property="Orientation" 
+        <Setter Property="Orientation"
                 Value="Horizontal" />
         <Setter Property="HorizontalOptions"
                 Value="EndAndExpand" />
@@ -120,7 +120,7 @@
     <Style x:Key="NewsDetailSourceText"
            TargetType="Label">
         <Setter Property="TextColor"
-                Value="#CBCBCB" />
+                Value="{StaticResource DetailTextColor}" />
         <Setter Property="FontSize"
                 Value="12" />
         <Setter Property="FontFamily"
