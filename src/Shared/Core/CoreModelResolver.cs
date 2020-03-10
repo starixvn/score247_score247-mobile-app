@@ -1231,6 +1231,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
                 { "UserId", 0},
                 { "Favorites", 1},
                 { "Platform", 2},
+                { "DeviceId", 3},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -1238,6 +1239,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("UserId"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Favorites"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Platform"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DeviceId"),
                 
             };
         }
@@ -1251,13 +1253,15 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 4);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.UserId, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>>().Serialize(ref bytes, offset, value.Favorites, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Platform, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DeviceId, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1276,6 +1280,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
             var __UserId__ = default(string);
             var __Favorites__ = default(global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>);
             var __Platform__ = default(string);
+            var __DeviceId__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -1299,6 +1304,9 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
                     case 2:
                         __Platform__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 3:
+                        __DeviceId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1310,7 +1318,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Favorites.UserFavorite(__UserId__, __Favorites__, __Platform__);
+            var ____result = new global::LiveScore.Core.Models.Favorites.UserFavorite(__UserId__, __DeviceId__, __Favorites__, __Platform__);
             return ____result;
         }
     }
