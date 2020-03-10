@@ -48,6 +48,7 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterSingleton<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusBuilder>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchMinuteBuilder, MatchMinuteBuilder>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<ISearchService, SoccerSearchService>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
 

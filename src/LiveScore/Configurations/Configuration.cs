@@ -18,9 +18,9 @@ namespace LiveScore.Configurations
         public string OneSignalAppId => "e7988708-b94d-4177-962d-ee23999ba9c1";
 
 #elif TEST
-        public string ApiEndPoint => "https://score247-api1.nexdev.net/test/api";
+        public string ApiEndPoint => "https://score247-api1.nexdev.net/dev/api";
         public string ImageEndPoint => "https://score247-api1.nexdev.net/test/news/images";
-        public string SignalRHubEndPoint => "https://score247-api2.nexdev.net/test/hubs";
+        public string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/";
         public string AppCenterSecret => "ios=b08e2753-b596-44c9-bed9-701d8dd8be8c;";
         public string SentryDsn => "https://4cf636af675645359c573f1b923693f8@sentry.nexdev.net/88";

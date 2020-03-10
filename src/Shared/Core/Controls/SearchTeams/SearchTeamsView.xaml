@@ -52,14 +52,13 @@
     <ContentPage.Content>
         <StackLayout Opacity="0"
                      x:Name="SearchView">
-
             <ListView Style="{StaticResource ListViewHasBackground}"
-                      ItemsSource="{Binding TeamsItemSource}"
+                      ItemsSource="{Binding DefaultSearch}"
                       HasUnevenRows="True"
                       Scrolled="ListView_OnScrolled"
-                      Header="{Binding ShowTrendingHeader}"
+                      IsGroupingEnabled="true"
                       SeparatorVisibility="None">
-                <ListView.HeaderTemplate>
+                <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <BoxView Grid.Row="0"
@@ -68,7 +67,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="TRENDING"
+                                <Label Grid.Row="0" Text="{Binding Heading}"
                                        Padding="16,0,0,0"
                                        Style="{StaticResource LeagueName}">
                                 </Label>
@@ -76,7 +75,7 @@
                             <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </DataTemplate>
-                </ListView.HeaderTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -105,12 +104,13 @@
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="CenterAndExpand"
                                        Style="{StaticResource LeagueName}"
-                                       Text="{ Binding Name, Converter={StaticResource UpperCaseConverter }}" />
+                                       Text="{ Binding SearchValue, Converter={StaticResource UpperCaseConverter }}" />
                                 </StackLayout>
 
                                 <Button Grid.Row="0"
                                         Grid.Column="1"
                                         x:Name="favoriteButton"
+                                        IsVisible="{Binding IsShowFavorite}"
                                         Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
                                         CommandParameter="{Binding .}"
                                         Style="{StaticResource InActiveFavoriteIcon}">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
+using LiveScore.Core.Models.Searches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
@@ -13,7 +14,9 @@ namespace LiveScore.Core.Controls.SearchTeams
 {
     public class SearchTeamsViewModel : ViewModelBase
     {
+        private const int RecentSearchLinit = 3;
         private readonly ITeamService teamService;
+        private readonly ISearchService searchService;
         private readonly IFavoriteService<ITeamProfile> favoriteService;
         private readonly Func<string, string> buildTeamLogoUrlFunc;
         private IList<ITeamProfile> favoriteTeams;
@@ -30,13 +33,13 @@ namespace LiveScore.Core.Controls.SearchTeams
             OpenTeamDetailCommand = new DelegateAsyncCommand<ITeamProfile>(OnTapTeam);
             buildTeamLogoUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildTeamLogoUrlFuncName);
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
+            searchService = DependencyResolver.Resolve<ISearchService>(CurrentSportId.ToString());
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
-
             Task.Run(() => LoadDataAsync(LoadTeamData));
         }
 
@@ -61,6 +64,10 @@ namespace LiveScore.Core.Controls.SearchTeams
         public DelegateAsyncCommand<ITeamProfile> OpenTeamDetailCommand { get; }
 
         public IReadOnlyCollection<ITeamProfile> TeamsItemSource { get; private set; }
+
+        public IList<RecentSearch> RecentSearches { get; private set; }
+
+        public List<SearchListGroup> DefaultSearch { get; private set; }
 
         public async Task OnCancelSearch()
         {
@@ -89,8 +96,28 @@ namespace LiveScore.Core.Controls.SearchTeams
         private async Task LoadTrendingTeams()
         {
             ShowTrendingHeader = true;
+            DefaultSearch = new List<SearchListGroup>();
+
+            var recentSearchKeys = searchService.GetRecentSearchKeys(RecentSearchLinit);
+
+            if (recentSearchKeys.Any())
+            {
+                var recentSearch = new SearchListGroup();
+                recentSearch.Heading = "Recent Search";
+                foreach (var key in recentSearchKeys)
+                {
+                    recentSearch.Add(new SearchItem(key.Key));
+                }
+
+                DefaultSearch.Add(recentSearch);
+            }
 
             trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName))?.ToList();
+
+            var trendingGroup = new SearchListGroup();
+            trendingGroup.AddRange(trendingTeams.Select(team => new SearchItem(team)));
+            trendingGroup.Heading = "Trending";
+            DefaultSearch.Add(trendingGroup);
 
             BuildTeamItemSource(trendingTeams);
         }
