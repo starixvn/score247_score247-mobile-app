@@ -1,10 +1,10 @@
 ﻿namespace LiveScore.Core.Controls.SearchTeams
 {
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    public class SearchListGroup : List<SearchItem>
+    public class SearchListGroup : ObservableCollection<SearchItem>
     {
         public string Heading { get; set; }
-        public List<SearchItem> SearchItems => this;
+        public ObservableCollection<SearchItem> SearchItems => this;
     }
 }

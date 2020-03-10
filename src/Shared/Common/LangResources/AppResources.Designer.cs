@@ -517,7 +517,7 @@ namespace LiveScore.Common.LangResources {
         
         /// <summary>
         ///   Looks up a localized string similar to This is the Cookie Policy for Score247, accessible from Score247&apos;s platforms (being the websites and/or applications of Score247 (including but not limited to desktop websites (including www.score247.net), mobile websites and native mobile applications) use cookies to distinguish you from other users. This allows us to provide you with the best possible experience when you browse our websites and helps us to understand how to improve our service even further.
-        ///By using any of the Services, you consent to the [rest of string was truncated]&quot;;.
+        ///By using any of the Services, you consent to th [rest of string was truncated]&quot;;.
         /// </summary>
         public static string CookiesPolicyScore247Intro {
             get {
@@ -778,8 +778,8 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Score247 will take reasonable steps to protect your personal information from misuse, interference, loss, unauthorized access and modification or disclosure. Any personal information that we receive is securely stored and access is restricted to authorized personnel of Score247.&amp;#10;&amp;#10;
-        ///Hopefully that has clarified things for you and as was previously mentioned if there is something that you aren&apos;t sure whether you need or not it&apos;s usually safer to leave cookies enabled in case it does interact with one  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Score247 will take reasonable steps to protect your personal information from misuse, interference, loss, unauthorized access and modification or disclosure. Any personal information that we receive is securely stored and access is restricted to authorized personnel of Score247.
+        ///Hopefully that has clarified things for you and as was previously mentioned if there is something that you aren&apos;t sure whether you need or not it&apos;s usually safer to leave cookies enabled in case it does interact with one of the fea [rest of string was truncated]&quot;;.
         /// </summary>
         public static string HowSecureIsYourInformationIntro {
             get {
@@ -824,7 +824,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;#x2022; You consent; &amp;#10;&amp;#x2022; You would reasonably expect us to use or disclose it for that other purpose; or  &amp;#10;&amp;#x2022; It is required or authorized by law or a court/tribunal order. &amp;#10;&amp;#x2022; Score247 generally uses personal information to: &amp;#10;&amp;#x2022; Provide you with products or services you have requested; &amp;#10;&amp;#x2022; Help Score247 manage and enhance its services; &amp;#10;&amp;#x2022; Communicate with you; &amp;#10;&amp;#x2022; Conduct competitions or promotions; or &amp;#10;&amp;#x2022; Provide you with on [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to . You consent;
+        ///. You would reasonably expect us to use or disclose it for that other purpose; or
+        ///. It is required or authorized by law or a court/tribunal order.
+        ///. Score247 generally uses personal information to:
+        ///. Provide you with products or services you have requested;
+        ///. Help Score247 manage and enhance its services;
+        ///. Communicate with you;
+        ///. Conduct competitions or promotions; or
+        ///. Provide you with ongoing information about opportunities in which Score247 believes you may be interested..
         /// </summary>
         public static string HowWeUseYourInformationIntro2 {
             get {
@@ -1436,6 +1444,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Search.
+        /// </summary>
+        public static string RecentSearch {
+            get {
+                return ResourceManager.GetString("RecentSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Red cards.
         /// </summary>
         public static string RedCards {
@@ -1670,6 +1687,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trending.
+        /// </summary>
+        public static string Trending {
+            get {
+                return ResourceManager.GetString("Trending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TV.
         /// </summary>
         public static string TV {
@@ -1724,8 +1750,8 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If for any reason we do collect personal information, it will be collected and used in accordance with this Cookie Policy. The use of this information is subject to the Company Privacy Principles and is only used for the purpose for which it was provided. &amp;#10;&amp;#10;
-        ///Score247 will not collect sensitive information revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, or details of health, disability or sexual activity or orientation except with yo [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to If for any reason we do collect personal information, it will be collected and used in accordance with this Cookie Policy. The use of this information is subject to the Company Privacy Principles and is only used for the purpose for which it was provided.
+        ///Score247 will not collect sensitive information revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, or details of health, disability or sexual activity or orientation except with your consent  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string WhatPersonalInformationWeCollectIntro {
             get {

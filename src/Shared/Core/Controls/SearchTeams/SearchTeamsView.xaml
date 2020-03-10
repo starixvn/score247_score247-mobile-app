@@ -56,24 +56,26 @@
                       ItemsSource="{Binding DefaultSearch}"
                       HasUnevenRows="True"
                       Scrolled="ListView_OnScrolled"
-                      IsGroupingEnabled="true"
+                      IsGroupingEnabled="{Binding ShowTrendingHeader}"
                       SeparatorVisibility="None">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <BoxView Grid.Row="0"
+                        <ViewCell>
+                            <StackLayout IsVisible="{Binding ShowTrendingHeader}">
+                                <BoxView Grid.Row="0"
                                  Style="{StaticResource HeaderBarLine}" />
-                            <Grid Style="{StaticResource LeagueBox}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="{Binding Heading}"
+                                <Grid Style="{StaticResource LeagueBox}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="{Binding Heading}"
                                        Padding="16,0,0,0"
                                        Style="{StaticResource LeagueName}">
-                                </Label>
-                            </Grid>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
-                        </StackLayout>
+                                    </Label>
+                                </Grid>
+                                <BoxView Style="{StaticResource HorizontalLine}" />
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
@@ -92,7 +94,7 @@
                                              Grid.Column="0"
                                              Orientation="Horizontal"
                                              xamEffects:Commands.Tap="{Binding Path=BindingContext.OpenTeamDetailCommand, Source={x:Reference Name=self}}"
-                                             xamEffects:Commands.TapParameter="{Binding .}">
+                                             xamEffects:Commands.TapParameter="{Binding Team}">
                                     <ffloading:CachedImage
                                                        Source="{Binding LogoUrl}"
                                                        DownsampleToViewSize="True"
@@ -112,7 +114,7 @@
                                         x:Name="favoriteButton"
                                         IsVisible="{Binding IsShowFavorite}"
                                         Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
-                                        CommandParameter="{Binding .}"
+                                        CommandParameter="{Binding Team}"
                                         Style="{StaticResource InActiveFavoriteIcon}">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button"

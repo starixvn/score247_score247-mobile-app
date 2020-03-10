@@ -661,16 +661,16 @@ By using any of the Services, you consent to the terms of this Policy.</value>
     <value>HOW SECURE IS YOUR INFORMATION</value>
   </data>
   <data name="HowSecureIsYourInformationIntro" xml:space="preserve">
-    <value>Score247 will take reasonable steps to protect your personal information from misuse, interference, loss, unauthorized access and modification or disclosure. Any personal information that we receive is securely stored and access is restricted to authorized personnel of Score247.&amp;#10;&amp;#10;
-Hopefully that has clarified things for you and as was previously mentioned if there is something that you aren't sure whether you need or not it's usually safer to leave cookies enabled in case it does interact with one of the features you use on our site.&amp;#10;&amp;#10;
+    <value>Score247 will take reasonable steps to protect your personal information from misuse, interference, loss, unauthorized access and modification or disclosure. Any personal information that we receive is securely stored and access is restricted to authorized personnel of Score247.
+Hopefully that has clarified things for you and as was previously mentioned if there is something that you aren't sure whether you need or not it's usually safer to leave cookies enabled in case it does interact with one of the features you use on our site.
 We may, from time to time, change or update this cookie policy. All changes to this cookie policy will be published on this page of our Platform. Each change will become effective upon publication. We recommend that you revisit and read this cookie policy regularly to ensure that you are up-to-date with the current terms.</value>
   </data>
   <data name="HowWeUseCookies" xml:space="preserve">
     <value>HOW WE USE COOKIES?</value>
   </data>
   <data name="HowWeUseCookiesIntro" xml:space="preserve">
-    <value>As is common practice with almost all professional websites this site uses cookies, which are tiny files that are stored on your computer or mobile device. If you provide your consent to the use of cookies, this allows our platforms to store a modest amount of data specific to your device, which allows our platforms to recognize your connected application device and store information about your preferences or past actions so you can have an improved experience while using our platforms every time you visit us. For more general information on cookies see the Wikipedia article on HTTP Cookie. &amp;#10; &amp;#10;
-Score247 (also referred to as "company," "we," "our" or "us") respects your right to privacy. We are sensitive to the concerns that our clients, customers and online users may have with regards to the confidentiality, security and use of their personal information, and would like to reassure you of our position on this matter. The purpose of this Cookie Policy is to tell you what type of information we collect, how we may use that information, whether we disclose it to anyone, and the opportunities you have to access and correct the information we hold. We will also share how you can prevent these cookies from being stored however this may downgrade or "break" certain elements of the sites functionality. &amp;#10; &amp;#10;
+    <value>As is common practice with almost all professional websites this site uses cookies, which are tiny files that are stored on your computer or mobile device. If you provide your consent to the use of cookies, this allows our platforms to store a modest amount of data specific to your device, which allows our platforms to recognize your connected application device and store information about your preferences or past actions so you can have an improved experience while using our platforms every time you visit us. For more general information on cookies see the Wikipedia article on HTTP Cookie.
+Score247 (also referred to as "company," "we," "our" or "us") respects your right to privacy. We are sensitive to the concerns that our clients, customers and online users may have with regards to the confidentiality, security and use of their personal information, and would like to reassure you of our position on this matter. The purpose of this Cookie Policy is to tell you what type of information we collect, how we may use that information, whether we disclose it to anyone, and the opportunities you have to access and correct the information we hold. We will also share how you can prevent these cookies from being stored however this may downgrade or "break" certain elements of the sites functionality.
 We encourage you to check this Cookie Policy regularly as this Cookie Policy may change from time to time</value>
   </data>
   <data name="HowWeUseYourInformation" xml:space="preserve">
@@ -680,13 +680,27 @@ We encourage you to check this Cookie Policy regularly as this Cookie Policy may
     <value>If we hold personal information about you that was collected for a particular purpose, we will not use or disclose it for another purpose unless:</value>
   </data>
   <data name="HowWeUseYourInformationIntro2" xml:space="preserve">
-    <value>&amp;#x2022; You consent; &amp;#10;&amp;#x2022; You would reasonably expect us to use or disclose it for that other purpose; or  &amp;#10;&amp;#x2022; It is required or authorized by law or a court/tribunal order. &amp;#10;&amp;#x2022; Score247 generally uses personal information to: &amp;#10;&amp;#x2022; Provide you with products or services you have requested; &amp;#10;&amp;#x2022; Help Score247 manage and enhance its services; &amp;#10;&amp;#x2022; Communicate with you; &amp;#10;&amp;#x2022; Conduct competitions or promotions; or &amp;#10;&amp;#x2022; Provide you with ongoing information about opportunities in which Score247 believes you may be interested.</value>
+    <value>. You consent;
+. You would reasonably expect us to use or disclose it for that other purpose; or
+. It is required or authorized by law or a court/tribunal order.
+. Score247 generally uses personal information to:
+. Provide you with products or services you have requested;
+. Help Score247 manage and enhance its services;
+. Communicate with you;
+. Conduct competitions or promotions; or
+. Provide you with ongoing information about opportunities in which Score247 believes you may be interested.</value>
   </data>
   <data name="WhatPersonalInformationWeCollect" xml:space="preserve">
     <value>WHAT PERSONAL INFORMATION WE COLLECT</value>
   </data>
   <data name="WhatPersonalInformationWeCollectIntro" xml:space="preserve">
-    <value>If for any reason we do collect personal information, it will be collected and used in accordance with this Cookie Policy. The use of this information is subject to the Company Privacy Principles and is only used for the purpose for which it was provided. &amp;#10;&amp;#10;
+    <value>If for any reason we do collect personal information, it will be collected and used in accordance with this Cookie Policy. The use of this information is subject to the Company Privacy Principles and is only used for the purpose for which it was provided.
 Score247 will not collect sensitive information revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, or details of health, disability or sexual activity or orientation except with your consent or where such collection is permitted under the Company Privacy Principles.</value>
+  </data>
+  <data name="RecentSearch" xml:space="preserve">
+    <value>Recent Search</value>
+  </data>
+  <data name="Trending" xml:space="preserve">
+    <value>Trending</value>
   </data>
 </root>

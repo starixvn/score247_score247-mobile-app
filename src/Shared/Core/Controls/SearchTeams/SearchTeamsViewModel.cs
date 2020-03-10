@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core.Models.Searches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
@@ -35,6 +37,8 @@ namespace LiveScore.Core.Controls.SearchTeams
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
             searchService = DependencyResolver.Resolve<ISearchService>(CurrentSportId.ToString());
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
+
+            DefaultSearch = new ObservableCollection<SearchListGroup>();
         }
 
         public override void OnAppearing()
@@ -50,7 +54,7 @@ namespace LiveScore.Core.Controls.SearchTeams
         private async Task LoadTeamData()
         {
             favoriteTeams = favoriteService.GetAll();
-            await LoadTrendingTeams();
+            await LoadRecentSearchAndTrendingTeams();
         }
 
         public bool? ShowTrendingHeader { get; private set; } = true;
@@ -67,7 +71,7 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         public IList<RecentSearch> RecentSearches { get; private set; }
 
-        public List<SearchListGroup> DefaultSearch { get; private set; }
+        public ObservableCollection<SearchListGroup> DefaultSearch { get; private set; }
 
         public async Task OnCancelSearch()
         {
@@ -80,7 +84,7 @@ namespace LiveScore.Core.Controls.SearchTeams
             {
                 if (text.Length == 0)
                 {
-                    await LoadTrendingTeams();
+                    await LoadRecentSearchAndTrendingTeams();
                 }
 
                 return;
@@ -90,36 +94,72 @@ namespace LiveScore.Core.Controls.SearchTeams
 
             var team = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
 
-            BuildTeamItemSource(team);
+            BuildSearchResultItemSource(team);
         }
 
-        private async Task LoadTrendingTeams()
+        private void BuildSearchResultItemSource(List<ITeamProfile> teams)
+        {
+            DefaultSearch = new ObservableCollection<SearchListGroup>();
+            var searchResults = new SearchListGroup();
+            searchResults.Heading = "Results";
+            foreach (var team in teams)
+            {
+                team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
+                team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
+                searchResults.Add(new SearchItem(team));
+            }
+            DefaultSearch.Add(searchResults);
+        }
+
+        private async Task LoadRecentSearchAndTrendingTeams()
         {
             ShowTrendingHeader = true;
-            DefaultSearch = new List<SearchListGroup>();
+            DefaultSearch = new ObservableCollection<SearchListGroup>();
 
+            var recentSearch = GetRecentSearch();
+            if (recentSearch.Any())
+            {
+                DefaultSearch.Add(recentSearch);
+            }
+
+            var trendingGroup = await GetTrendingTeams();
+            DefaultSearch.Add(trendingGroup);
+        }
+
+        private async Task<SearchListGroup> GetTrendingTeams()
+        {
+            trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName))?.ToList();
+
+            var trendingGroup = new SearchListGroup();
+            foreach (var team in trendingTeams)
+            {
+                team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
+                team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
+                trendingGroup.Add(new SearchItem(team));
+            }
+
+            trendingGroup.Heading = AppResources.Trending;
+
+            return trendingGroup;
+        }
+
+        private SearchListGroup GetRecentSearch()
+        {
             var recentSearchKeys = searchService.GetRecentSearchKeys(RecentSearchLinit);
 
             if (recentSearchKeys.Any())
             {
                 var recentSearch = new SearchListGroup();
-                recentSearch.Heading = "Recent Search";
+                recentSearch.Heading = AppResources.RecentSearch;
                 foreach (var key in recentSearchKeys)
                 {
                     recentSearch.Add(new SearchItem(key.Key));
                 }
 
-                DefaultSearch.Add(recentSearch);
+                return recentSearch;
             }
 
-            trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName))?.ToList();
-
-            var trendingGroup = new SearchListGroup();
-            trendingGroup.AddRange(trendingTeams.Select(team => new SearchItem(team)));
-            trendingGroup.Heading = "Trending";
-            DefaultSearch.Add(trendingGroup);
-
-            BuildTeamItemSource(trendingTeams);
+            return new SearchListGroup();
         }
 
         private Task OnFavoriteTeam(ITeamProfile team)
@@ -136,25 +176,6 @@ namespace LiveScore.Core.Controls.SearchTeams
             }
 
             return Task.CompletedTask;
-        }
-
-        private void BuildTeamItemSource(IList<ITeamProfile> teams)
-        {
-            var teamList = teams?.ToList();
-
-            if (teamList?.Any() != true)
-            {
-                TeamsItemSource = new List<ITeamProfile>();
-                return;
-            }
-
-            teamList.ForEach(team =>
-            {
-                team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
-                team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
-            });
-
-            TeamsItemSource = teamList;
         }
 
         private async Task OnTapTeam(ITeamProfile team)
