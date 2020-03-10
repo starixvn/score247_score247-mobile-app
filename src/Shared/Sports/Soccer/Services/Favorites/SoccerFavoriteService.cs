@@ -40,8 +40,9 @@ namespace LiveScore.Soccer.Services.Favorites
             {
                 Debug.WriteLine("SyncToServer");
 
+                var deviceId = string.Empty;
                 userId = await GetUserIdAsync();
-                var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, addedFavorites), new UserFavorite(userId, removedFavorites));
+                var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, deviceId, addedFavorites), new UserFavorite(userId, deviceId, removedFavorites));
 
                 return await apiService.Execute(()
                     => favoriteApi.Sync(syncUserFavorite, settings.CurrentLanguage.DisplayName));
@@ -63,11 +64,11 @@ namespace LiveScore.Soccer.Services.Favorites
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
-                var generatedUserId = (await userService.GetOrCreateUserIdAsync()).ToString();
+                var generatedUserId = (await userService.GetOrCreateUserIdAsync());
 
                 if (generatedUserId == null)
                 {
-                    throw new ArgumentNullException("UserId", "Cannot generate UserId");
+                    throw new InvalidOperationException("Cannot generate UserId");
                 }
 
                 return generatedUserId;
