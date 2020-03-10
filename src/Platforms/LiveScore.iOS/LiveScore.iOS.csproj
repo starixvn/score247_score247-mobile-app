@@ -202,11 +202,12 @@
     <CodesignProvision>Score247.Development</CodesignProvision>
     <CodesignKey>Apple Development: Score247 Nex (77CJMQ457X)</CodesignKey>
     <MtouchArch>ARM64</MtouchArch>
-    <MtouchFastDev>true</MtouchFastDev>
     <MtouchFloat32>false</MtouchFloat32>
-    <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchExtraArgs>--optimize=experimental-xforms-product-type</MtouchExtraArgs>
+    <MtouchLink>None</MtouchLink>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
