@@ -26,7 +26,7 @@ namespace LiveScore.Soccer.Services.Favorites
 
             Task.Run(() => Sync(
                 addedFavorites: Objects.Select(team => new Favorite(team.Id, FavoriteType.TeamValue, team.Name)).ToList()
-            ));
+            )).ConfigureAwait(false);
 
             OnRemovedFavorite = PublishRemovedEvent;
             OnAddedFavorite = PublishAddedEvent;

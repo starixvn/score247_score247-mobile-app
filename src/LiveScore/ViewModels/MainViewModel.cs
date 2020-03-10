@@ -6,6 +6,7 @@ using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -25,6 +26,7 @@ namespace LiveScore.ViewModels
         private readonly ISettingsService settingsService;
         private readonly IFavoriteService<IMatch> favoriteMatchService;
         private readonly IFavoriteService<ILeague> favoriteLeagueService;
+        private readonly IFavoriteService<ITeamProfile> favoriteTeamService;
         private bool disposedValue;
 
         public MainViewModel(
@@ -44,6 +46,7 @@ namespace LiveScore.ViewModels
             NotificationStatus = settingsService.GetNotificationStatus();
             favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+            favoriteTeamService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
             SetupAppInfo();
         }
 
@@ -74,6 +77,7 @@ namespace LiveScore.ViewModels
                 {
                     favoriteMatchService.Sync();
                     favoriteLeagueService.Sync();
+                    favoriteTeamService.Sync();
                     settingsService.SyncNotification();
 
                     if (PopupNavigation.Instance.PopupStack.Count > 0)

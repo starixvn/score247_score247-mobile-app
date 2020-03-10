@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
@@ -87,6 +89,8 @@ namespace LiveScore.Features.Score.ViewModels
                 SelectedScoreItem?.OnAppearing();
                 GetLiveMatchesCount();
             }
+
+            Debug.WriteLine("ScoresViewModel OnAppearing");
         }
 
         public override void OnDisappearing()
@@ -109,6 +113,15 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             secondLoad = true;
+
+            EventAggregator
+              .GetEvent<FinishInitializationEvent>()
+              .Subscribe(OnFinishInitialization);
+        }
+
+        private static void OnFinishInitialization()
+        {
+            Debug.WriteLine("OnFinishInitialization");
         }
 
         private void GetLiveMatchesCount()
@@ -131,6 +144,10 @@ namespace LiveScore.Features.Score.ViewModels
                 oldItemSource.IsActive = false;
                 oldItemSource.OnDisappearing();
             }
+
+            EventAggregator
+                .GetEvent<FinishInitializationEvent>()
+                .Unsubscribe(OnFinishInitialization);
         }
 
         private void InitScoreItemSources()

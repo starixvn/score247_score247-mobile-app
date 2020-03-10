@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
@@ -24,12 +25,14 @@ namespace LiveScore.Soccer.Services
             INetworkConnection networkConnection)
             : base(loggingService)
         {
+            Debug.WriteLine("SettingsService constructor");
+
             this.userSettingService = userSettingService;
             this.userService = userService;
             settingsApi = apiService.GetApi<SettingsApi>();
             this.networkConnection = networkConnection;
 
-            Task.Run(SyncNotification);
+            Task.Run(SyncNotification).ConfigureAwait(false);
         }
 
         public bool GetNotificationStatus()
@@ -38,6 +41,7 @@ namespace LiveScore.Soccer.Services
         public async Task UpdateNotificationStatus(bool notificationStatus)
         {
             userSettingService.AddOrUpdateValue(NotificationCacheKey, notificationStatus);
+
             await SyncNotification();
         }
 

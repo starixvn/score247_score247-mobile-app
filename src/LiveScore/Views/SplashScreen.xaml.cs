@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using LiveScore.Core.Events;
 using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using MethodTimer;
@@ -57,6 +59,10 @@ namespace LiveScore.Views
             {
                 eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
             }
+
+            Debug.WriteLine("Finish LoadMainPageAsync");
+
+            Device.BeginInvokeOnMainThread(() => eventAggregator.GetEvent<FinishInitializationEvent>().Publish());
         }
     }
 }
