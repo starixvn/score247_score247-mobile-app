@@ -18,6 +18,7 @@ namespace LiveScore.Soccer.Services.Favorites
         private readonly ISettings settings;
 
         private string userId;
+        private string deviceId;
 
         protected SoccerFavoriteService(
             string key,
@@ -40,7 +41,7 @@ namespace LiveScore.Soccer.Services.Favorites
             {
                 Debug.WriteLine("SyncToServer");
 
-                var deviceId = string.Empty;
+                deviceId = userService.GetOrCreateDeviceId();
                 userId = await GetUserIdAsync();
                 var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, deviceId, addedFavorites), new UserFavorite(userId, deviceId, removedFavorites));
 
