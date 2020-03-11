@@ -20,7 +20,6 @@
         protected readonly IUserSettingService userSettingService;
         protected IList<T> Objects;
 
-
         protected SearchService(
             string key,
             IDependencyResolver dependencyResolver)
@@ -36,7 +35,7 @@
 
         public bool UpdateRecent(T obj)
         {
-            if (!Objects.Contains(obj))
+            if (Objects.Contains(obj))
             {
                 Objects.Remove(obj);
             }
