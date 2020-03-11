@@ -17,12 +17,11 @@ namespace LiveScore.Core.Controls.SearchTeams
     {
         private const int RecentSearchLinit = 3;
         private readonly ITeamService teamService;
-        private readonly ISearchService searchService;
+        private readonly ISearchService<ITeamProfile> searchService;
         private readonly IFavoriteService<ITeamProfile> favoriteService;
         private readonly Func<string, string> buildTeamLogoUrlFunc;
         private IList<ITeamProfile> favoriteTeams;
         private IList<ITeamProfile> trendingTeams;
-        private string currentSearchKey;
 
         public SearchTeamsViewModel(
             INavigationService navigationService,
@@ -35,7 +34,7 @@ namespace LiveScore.Core.Controls.SearchTeams
             OpenTeamDetailCommand = new DelegateAsyncCommand<ITeamProfile>(OnTapTeam);
             buildTeamLogoUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildTeamLogoUrlFuncName);
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
-            searchService = DependencyResolver.Resolve<ISearchService>(CurrentSportId.ToString());
+            searchService = DependencyResolver.Resolve<ISearchService<ITeamProfile>>(CurrentSportId.ToString());
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
 
             DefaultSearch = new ObservableCollection<SearchListGroup>();
@@ -88,12 +87,10 @@ namespace LiveScore.Core.Controls.SearchTeams
                 return;
             }
 
-            currentSearchKey = text;
             ShowTrendingHeader = false;
+            var teams = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
 
-            var team = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
-
-            BuildSearchResultItemSource(team);
+            BuildSearchResultItemSource(teams);
         }
 
         private void BuildSearchResultItemSource(List<ITeamProfile> teams)

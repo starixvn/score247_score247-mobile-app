@@ -113,7 +113,6 @@
 
                                 <Button Grid.Row="0"
                                         Grid.Column="1"
-                                        IsVisible="{Binding IsShowFavorite}"
                                         Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
                                         CommandParameter="{Binding .}"
                                         Style="{StaticResource InActiveFavoriteIcon}">
@@ -175,7 +174,6 @@
 
                                 <Button Grid.Row="0"
                                         Grid.Column="1"
-                                        IsVisible="{Binding IsShowFavorite}"
                                         Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
                                         CommandParameter="{Binding .}"
                                         Style="{StaticResource InActiveFavoriteIcon}">
