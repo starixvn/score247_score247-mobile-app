@@ -1,16 +1,17 @@
 ﻿namespace LiveScore.Core.Models.Searches
 {
+    using LiveScore.Core.Models.Teams;
     using System;
 
     public class RecentSearch
     {
-        public RecentSearch(string key, DateTimeOffset searchDate)
+        public RecentSearch(ITeamProfile team, DateTimeOffset searchDate)
         {
-            Key = key;
+            Team = team;
             SearchDate = searchDate;
         }
 
-        public string Key { get; }
+        public ITeamProfile Team { get; }
 
         public DateTimeOffset SearchDate { get; }
     }
