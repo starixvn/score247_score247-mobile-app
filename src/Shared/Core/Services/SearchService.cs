@@ -12,7 +12,7 @@
     {
         bool UpdateRecent(ITeamProfile team);
 
-        IEnumerable<RecentSearch> GetRecentSearchKeys(int limit);
+        IEnumerable<ITeamProfile> GetRecentSearchKeys(int limit);
     }
 
     public class SearchService : ISearchService
@@ -34,13 +34,12 @@
 
         public bool UpdateRecent(ITeamProfile team)
         {
-            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<RecentSearch>());
+            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<ITeamProfile>());
             recentSearches = recentSearches.Where(searchKey => searchKey.Id != team.Id).ToList();
-            recentSearches.Add(new RecentSearch(team, DateTime.UtcNow));
+            recentSearches.Add(team);
             if (recentSearches.Count > LimitSearchKey)
             {
-                var oldestSearchKey = recentSearches.OrderBy(key => key.SearchDate).FirstOrDefault();
-                recentSearches.Remove(oldestSearchKey);
+                recentSearches.RemoveAt(0);
             }
 
             userSettingService.AddOrUpdateValue(RecentSearchCacheKey + Key, JsonConvert.SerializeObject(recentSearches));
@@ -48,11 +47,12 @@
             return true;
         }
 
-        public IEnumerable<RecentSearch> GetRecentSearchKeys(int limit)
+        public IEnumerable<ITeamProfile> GetRecentSearchKeys(int limit)
         {
-            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<RecentSearch>());
+            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<ITeamProfile>());
+            recentSearches.Reverse();
 
-            return recentSearches.OrderBy(key => key.SearchDate).Take(limit);
+            return recentSearches.Take(limit);
         }
     }
 }
