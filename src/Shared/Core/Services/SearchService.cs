@@ -6,21 +6,22 @@
 
     public interface ISearchService<T>
     {
-        bool UpdateRecent(T team);
+        bool UpdateRecent(T obj);
 
         IEnumerable<T> GetRecentSearchKeys(int limit);
     }
 
-    public class SearchService<T> : ISearchService<T>
+    public abstract class SearchService<T> : ISearchService<T>
     {
-        protected readonly IUserSettingService userSettingService;
+        protected const string RecentSearchCacheKey = "RecentSearch";
+        private const int LimitSearchKey = 100;
 
         protected string Key;
+        protected readonly IUserSettingService userSettingService;
+        protected IList<T> Objects;
 
-        private const int LimitSearchKey = 100;
-        private const string RecentSearchCacheKey = "RecentSearch";
 
-        public SearchService(
+        protected SearchService(
             string key,
             IDependencyResolver dependencyResolver)
         {
@@ -28,27 +29,30 @@
             userSettingService = dependencyResolver.Resolve<IUserSettingService>();
         }
 
-        public bool UpdateRecent(T team)
+        public void Init()
         {
-            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<T>());
-            recentSearches.Remove(team);
-            recentSearches.Add(team);
-            if (recentSearches.Count > LimitSearchKey)
+            Objects = GetRecentSearchKeys(LimitSearchKey).ToList();
+        }
+
+        public bool UpdateRecent(T obj)
+        {
+            if (!Objects.Contains(obj))
             {
-                recentSearches.RemoveAt(0);
+                Objects.Remove(obj);
             }
 
-            userSettingService.AddOrUpdateValue(RecentSearchCacheKey + Key, recentSearches);
+            Objects.Add(obj);
+
+            if (Objects.Count > LimitSearchKey)
+            {
+                Objects.RemoveAt(0);
+            }
+
+            userSettingService.AddOrUpdateValue(RecentSearchCacheKey + Key, Objects);
 
             return true;
         }
 
-        public IEnumerable<T> GetRecentSearchKeys(int limit)
-        {
-            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<T>());
-            recentSearches.Reverse();
-
-            return recentSearches.Take(limit);
-        }
+        public abstract IEnumerable<T> GetRecentSearchKeys(int limit);
     }
 }

@@ -57,8 +57,7 @@
                       ItemsSource="{Binding DefaultSearch}"
                       IsVisible="{Binding ShowTrendingHeader}"
                       HasUnevenRows="True"
-                      Scrolled="ListView_OnScrolled"
-                      IsGroupingEnabled="{Binding ShowTrendingHeader}"
+                      IsGroupingEnabled="True"
                       SeparatorVisibility="None">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>

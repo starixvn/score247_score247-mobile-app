@@ -22,6 +22,7 @@ namespace LiveScore.Core.Controls.SearchTeams
         private readonly Func<string, string> buildTeamLogoUrlFunc;
         private IList<ITeamProfile> favoriteTeams;
         private IList<ITeamProfile> trendingTeams;
+        private string currentSearchKey;
 
         public SearchTeamsViewModel(
             INavigationService navigationService,
@@ -36,8 +37,6 @@ namespace LiveScore.Core.Controls.SearchTeams
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
             searchService = DependencyResolver.Resolve<ISearchService<ITeamProfile>>(CurrentSportId.ToString());
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
-
-            DefaultSearch = new ObservableCollection<SearchListGroup>();
         }
 
         public override void OnAppearing()
@@ -53,7 +52,13 @@ namespace LiveScore.Core.Controls.SearchTeams
         private async Task LoadTeamData()
         {
             favoriteTeams = favoriteService.GetAll();
-            await LoadRecentSearchAndTrendingTeams();
+            if(string.IsNullOrEmpty(currentSearchKey))
+            {
+                await LoadRecentSearchAndTrendingTeams();
+            } else
+            {
+                await OnSearchTeam(currentSearchKey);
+            }
         }
 
         public bool ShowTrendingHeader { get; private set; } = true;
@@ -66,9 +71,9 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         public DelegateAsyncCommand<ITeamProfile> OpenTeamDetailCommand { get; }
 
-        public ObservableCollection<ITeamProfile> TeamsItemSource { get; private set; }
+        public IReadOnlyCollection<ITeamProfile> TeamsItemSource { get; private set; }
 
-        public ObservableCollection<SearchListGroup> DefaultSearch { get; private set; }
+        public IReadOnlyCollection<SearchListGroup> DefaultSearch { get; private set; }
 
         public async Task OnCancelSearch()
         {
@@ -87,6 +92,7 @@ namespace LiveScore.Core.Controls.SearchTeams
                 return;
             }
 
+            currentSearchKey = text;
             ShowTrendingHeader = false;
             var teams = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
 
@@ -95,35 +101,42 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         private void BuildSearchResultItemSource(List<ITeamProfile> teams)
         {
-            TeamsItemSource = new ObservableCollection<ITeamProfile>();
             foreach (var team in teams)
             {
                 team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
                 team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
-                TeamsItemSource.Add(team);
             }
+            TeamsItemSource = new List<ITeamProfile>(teams);
         }
 
         private async Task LoadRecentSearchAndTrendingTeams()
         {
-            ShowTrendingHeader = true;
-            DefaultSearch = new ObservableCollection<SearchListGroup>();
+            ShowTrendingHeader = false;
+
+            var recentAndTrendingTeams = new List<SearchListGroup>();
 
             var recentSearch = GetRecentSearch();
             if (recentSearch.Any())
             {
-                DefaultSearch.Add(recentSearch);
+                recentAndTrendingTeams.Add(recentSearch);
             }
 
             var trendingGroup = await GetTrendingTeams();
-            DefaultSearch.Add(trendingGroup);
+            recentAndTrendingTeams.Add(trendingGroup);
+
+            DefaultSearch = new List<SearchListGroup>(recentAndTrendingTeams);
+            ShowTrendingHeader = true;
         }
 
         private async Task<SearchListGroup> GetTrendingTeams()
         {
             trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName))?.ToList();
-
             var trendingGroup = new SearchListGroup();
+            if (trendingTeams == null)
+            {
+                return trendingGroup;
+            }
+
             foreach (var team in trendingTeams)
             {
                 team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
