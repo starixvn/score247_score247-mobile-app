@@ -30,7 +30,9 @@ namespace LiveScore.Soccer.Services.Favorites
 
         private Task PublishRemovedEvent(ITeamProfile team)
         {
-            return Task.Run(() => Sync(removedFavorites: new List<Favorite> { new Favorite(team.Id, FavoriteType.TeamValue, team.Name) }));
+            return Task.Run(() => Sync(removedFavorites: new List<Favorite> {
+                new Favorite(team.Id, FavoriteType.TeamValue, team.Name)
+            }));
         }
 
         private Task PublishAddedEvent(ITeamProfile team)
@@ -55,5 +57,6 @@ namespace LiveScore.Soccer.Services.Favorites
                 .GetValueOrDefault(Key, Enumerable.Empty<TeamProfile>())
                 .Select(team => team as ITeamProfile)
                 .ToList();
+
     }
 }

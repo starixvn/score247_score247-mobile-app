@@ -78,6 +78,9 @@ namespace LiveScore.Soccer.Services.Favorites
 
             userSettingService.AddOrUpdateValue(Key, enableMatches.Select(obj => obj as SoccerMatch).ToList());
             Objects = enableMatches;
+
+            AddedFavorites.AddRange(enableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList());
+            RemovedFavorites.AddRange(disableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList());
         }
     }
 }

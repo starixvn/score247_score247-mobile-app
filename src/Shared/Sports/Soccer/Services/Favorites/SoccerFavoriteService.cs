@@ -43,7 +43,9 @@ namespace LiveScore.Soccer.Services.Favorites
 
                 deviceId = userService.GetOrCreateDeviceId();
                 userId = await GetUserIdAsync();
-                var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, deviceId, addedFavorites), new UserFavorite(userId, deviceId, removedFavorites));
+                var syncUserFavorite = new SyncUserFavorite(
+                    new UserFavorite(userId, deviceId, addedFavorites),
+                    new UserFavorite(userId, deviceId, removedFavorites));
 
                 return await apiService.Execute(()
                     => favoriteApi.Sync(syncUserFavorite, settings.CurrentLanguage.DisplayName));
