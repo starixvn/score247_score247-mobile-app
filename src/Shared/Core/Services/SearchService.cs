@@ -34,13 +34,8 @@
 
         public bool UpdateRecent(ITeamProfile team)
         {
-            var recentSearchesString = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, string.Empty);
-            var recentSearches = JsonConvert.DeserializeObject<List<RecentSearch>>(recentSearchesString);
-            if (recentSearches == null)
-            {
-                recentSearches = new List<RecentSearch>();
-            }
-
+            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<RecentSearch>());
+            recentSearches = recentSearches.Where(searchKey => searchKey.Id != team.Id).ToList();
             recentSearches.Add(new RecentSearch(team, DateTime.UtcNow));
             if (recentSearches.Count > LimitSearchKey)
             {
@@ -55,12 +50,7 @@
 
         public IEnumerable<RecentSearch> GetRecentSearchKeys(int limit)
         {
-            var recentSearchesString = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, string.Empty);
-            var recentSearches = JsonConvert.DeserializeObject<List<RecentSearch>>(recentSearchesString);
-            if (recentSearches == null)
-            {
-                recentSearches = new List<RecentSearch>();
-            }
+            var recentSearches = userSettingService.GetValueOrDefault(RecentSearchCacheKey + Key, new List<RecentSearch>());
 
             return recentSearches.OrderBy(key => key.SearchDate).Take(limit);
         }

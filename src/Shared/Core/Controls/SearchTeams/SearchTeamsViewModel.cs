@@ -149,7 +149,7 @@ namespace LiveScore.Core.Controls.SearchTeams
                 recentSearch.Heading = AppResources.RecentSearch;
                 foreach (var key in recentSearchKeys)
                 {
-                    recentSearch.Add(new SearchItem(key.Team));
+                    recentSearch.Add(new SearchItem(key));
                 }
 
                 return recentSearch;
