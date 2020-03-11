@@ -20,7 +20,11 @@ namespace LiveScore.Features.Favorites.ViewModels
 {
     public class FavoriteTeamMatchesViewModel : MatchesViewModel
     {
+        private const string InactiveFavoriteImageSource = "images/common/inactive_favorite_header_bar.png";
+        private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
+
         private readonly ITeamService teamService;
+        private readonly IFavoriteService<ITeamProfile> favoriteTeamService;
 
         public FavoriteTeamMatchesViewModel(
             INavigationService navigationService,
@@ -29,11 +33,18 @@ namespace LiveScore.Features.Favorites.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
+            favoriteTeamService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
+
             LoadResultMatchesCommand = new DelegateCommand(OnLoadResultMatches);
             HeaderViewModel = this;
+
+            FavoriteCommand = new DelegateCommand(OnFavorite);
+            favoriteService.OnReachLimitFavoriteItems += HandleReachedLimitation;
         }
 
         public DelegateCommand LoadResultMatchesCommand { get; }
+
+        public DelegateCommand FavoriteCommand { get; }
 
         public bool ShowPreviousEvents { get; private set; }
 
@@ -46,6 +57,10 @@ namespace LiveScore.Features.Favorites.ViewModels
         public IReadOnlyCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> ScheduleMatchItemSource { get; private set; }
 
         public ITeamProfile CurrentTeam { get; private set; }
+
+        public bool IsFavorite { get; private set; }
+
+        public string FavoriteImageSource => IsFavorite ? ActiveFavoriteImageSource : InactiveFavoriteImageSource;
 
         public override void Initialize(INavigationParameters parameters)
         {
@@ -73,6 +88,8 @@ namespace LiveScore.Features.Favorites.ViewModels
             {
                 await Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
             }
+
+            IsFavorite = favoriteTeamService.IsFavorite(CurrentTeam);
         }
 
         public override async void OnResumeWhenNetworkOK()
@@ -197,5 +214,26 @@ namespace LiveScore.Features.Favorites.ViewModels
                 ShowPreviousEvents = true;
             }
         }
+
+        private void OnFavorite()
+        {
+            if (IsFavorite)
+            {
+                favoriteTeamService.Remove(CurrentTeam);
+            }
+            else
+            {
+                favoriteTeamService.Add(CurrentTeam);
+            }
+
+            IsFavorite = !IsFavorite;
+        }
+
+        private Task HandleReachedLimitation()
+        {
+            IsFavorite = false;
+            return Task.CompletedTask;
+        }
+
     }
 }

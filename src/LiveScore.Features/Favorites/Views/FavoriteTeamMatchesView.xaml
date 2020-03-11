@@ -64,7 +64,9 @@
                        Text="{Binding CurrentTeam.Name, Converter={StaticResource UpperCaseConverter}}" />
                 <Button Grid.Row="0"
                                     Grid.Column="2"
-                                    Style="{StaticResource InActiveFavoriteIcon}" />
+                                    Style="{StaticResource InActiveFavoriteIcon}"
+                                    ImageSource="{Binding FavoriteImageSource}"
+                                    Command="{Binding FavoriteCommand}"/>
             </Grid>
             <BoxView Grid.Row="2"
                      Style="{StaticResource HorizontalLine}"

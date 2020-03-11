@@ -10,7 +10,6 @@
              xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Leagues.Templates"
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
-             xmlns:viewModel="clr-namespace:LiveScore.Soccer.ViewModels.Leagues"
              xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Leagues"
