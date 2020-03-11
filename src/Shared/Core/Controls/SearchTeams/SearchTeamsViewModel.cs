@@ -52,10 +52,11 @@ namespace LiveScore.Core.Controls.SearchTeams
         private async Task LoadTeamData()
         {
             favoriteTeams = favoriteService.GetAll();
-            if(string.IsNullOrEmpty(currentSearchKey))
+            if (string.IsNullOrEmpty(currentSearchKey))
             {
                 await LoadRecentSearchAndTrendingTeams();
-            } else
+            }
+            else
             {
                 await OnSearchTeam(currentSearchKey);
             }
@@ -151,15 +152,18 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         private SearchListGroup GetRecentSearch()
         {
-            var recentSearchKeys = searchService.GetRecentSearchKeys(RecentSearchLinit);
+            var recentSearchTeams = searchService.GetRecentSearchKeys(RecentSearchLinit);
 
-            if (recentSearchKeys.Any())
+            if (recentSearchTeams.Any())
             {
-                var recentSearch = new SearchListGroup();
-                recentSearch.Heading = AppResources.RecentSearch;
-                foreach (var key in recentSearchKeys)
+                var recentSearch = new SearchListGroup
                 {
-                    recentSearch.Add(key);
+                    Heading = AppResources.RecentSearch
+                };
+                foreach (var team in recentSearchTeams)
+                {
+                    team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
+                    recentSearch.Add(team);
                 }
 
                 return recentSearch;
@@ -179,6 +183,17 @@ namespace LiveScore.Core.Controls.SearchTeams
             {
                 favoriteService.Add(team);
                 team.IsFavorite = true;
+            }
+
+            foreach (var teamGroup in DefaultSearch)
+            {
+                foreach (var groupItem in teamGroup)
+                {
+                    if (groupItem.Id == team.Id)
+                    {
+                        groupItem.IsFavorite = team.IsFavorite;
+                    }
+                }
             }
 
             return Task.CompletedTask;
