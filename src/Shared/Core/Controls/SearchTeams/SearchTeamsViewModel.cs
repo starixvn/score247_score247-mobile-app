@@ -131,7 +131,7 @@ namespace LiveScore.Core.Controls.SearchTeams
             {
                 team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
                 team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
-                trendingGroup.Add(new SearchItem(team));
+                trendingGroup.Add(team);
             }
 
             trendingGroup.Heading = AppResources.Trending;
@@ -149,7 +149,7 @@ namespace LiveScore.Core.Controls.SearchTeams
                 recentSearch.Heading = AppResources.RecentSearch;
                 foreach (var key in recentSearchKeys)
                 {
-                    recentSearch.Add(new SearchItem(key));
+                    recentSearch.Add(key);
                 }
 
                 return recentSearch;

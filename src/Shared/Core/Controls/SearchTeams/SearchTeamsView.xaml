@@ -96,7 +96,7 @@
                                              Grid.Column="0"
                                              Orientation="Horizontal"
                                              xamEffects:Commands.Tap="{Binding Path=BindingContext.OpenTeamDetailCommand, Source={x:Reference Name=self}}"
-                                             xamEffects:Commands.TapParameter="{Binding Team}">
+                                             xamEffects:Commands.TapParameter="{Binding .}">
                                     <ffloading:CachedImage
                                                        Source="{Binding LogoUrl}"
                                                        DownsampleToViewSize="True"
@@ -108,14 +108,14 @@
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="CenterAndExpand"
                                        Style="{StaticResource LeagueName}"
-                                       Text="{ Binding SearchValue, Converter={StaticResource UpperCaseConverter }}" />
+                                       Text="{ Binding Name, Converter={StaticResource UpperCaseConverter }}" />
                                 </StackLayout>
 
                                 <Button Grid.Row="0"
                                         Grid.Column="1"
                                         IsVisible="{Binding IsShowFavorite}"
                                         Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
-                                        CommandParameter="{Binding Team}"
+                                        CommandParameter="{Binding .}"
                                         Style="{StaticResource InActiveFavoriteIcon}">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button"
