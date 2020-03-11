@@ -11,6 +11,8 @@ namespace LiveScore.Common.Services
         Task<string> GetOrCreateUserIdAsync();
 
         string GetOrCreateDeviceId();
+
+        void InitUserId();
     }
 
     public class UserService : IUserService
@@ -47,21 +49,24 @@ namespace LiveScore.Common.Services
 
             if (userId == default)
             {
+                
+                InitUserId();
+            }
 
-                OneSignal.Current.IdsAvailable((playerID, pushToken) =>
-                {
-                    userId = playerID;
-
-                    userSettingService.AddOrUpdateValue(UserIdKey, userId);
-                });
-
-
-            } 
-
-            Debug.WriteLine($"OneSignalUserId {userId}");
+            Debug.WriteLineIf(userId != default, $"OneSignalUserId {userId}");
 
             return userId;
         });
 
+        public void InitUserId()
+        {
+            // this callback will take times
+            OneSignal.Current.IdsAvailable((playerID, pushToken) =>
+            {
+                userSettingService.AddOrUpdateValue(UserIdKey, playerID);
+
+                Debug.WriteLine($"OneSignal playerID {playerID}");
+            });
+        }
     }
 }

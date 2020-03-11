@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Events;
+using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
@@ -20,13 +23,16 @@ namespace LiveScore.Features.Score.ViewModels
         private const byte LiveDateBarItemIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
         private readonly IMatchService matchService;
+        private readonly IFavoriteService<IMatch> favoriteMatchService;
+        private readonly IFavoriteService<ILeague> favoriteLeagueService;
+        private readonly IFavoriteService<ITeamProfile> favoriteTeamService;
+        private readonly ISettingsService settingsService;
         private bool secondLoad;
 
         public ScoresViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
-
         {
             IsActive = true;
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
@@ -35,6 +41,11 @@ namespace LiveScore.Features.Score.ViewModels
             OpenSearchTeamCommand = new DelegateAsyncCommand(OpenPopupSearchTeam);
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             InitScoreItemSources();
+
+            settingsService = DependencyResolver.Resolve<ISettingsService>();
+            favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
+            favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+            favoriteTeamService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -119,11 +130,6 @@ namespace LiveScore.Features.Score.ViewModels
               .Subscribe(OnFinishInitialization);
         }
 
-        private static void OnFinishInitialization()
-        {
-            Debug.WriteLine("OnFinishInitialization");
-        }
-
         private void GetLiveMatchesCount()
         {
             Task.Run(async () =>
@@ -184,6 +190,19 @@ namespace LiveScore.Features.Score.ViewModels
         private async Task OpenPopupSearchTeam()
         {
             await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView", useModalNavigation: true, animated: false);
+        }
+
+        private void OnFinishInitialization()
+        {
+            Task.Run(async () =>
+            {
+                Debug.WriteLine("OnFinishInitialization start sync");
+
+                await favoriteMatchService.Sync();
+                await favoriteLeagueService.Sync();
+                await favoriteTeamService.Sync();
+                await settingsService.SyncNotification();
+            });
         }
     }
 }

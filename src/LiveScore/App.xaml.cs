@@ -68,6 +68,7 @@ namespace LiveScore
             networkConnectionManager.StartListen();
             loggingService = Container.Resolve<ILoggingService>();
             var configuration = Container.Resolve<IConfiguration>();
+            var userService = Container.Resolve<IUserService>();
 
             OneSignal.Current
                 .StartInit(configuration.OneSignalAppId)
@@ -87,7 +88,8 @@ namespace LiveScore
                     HandlePushNotification(notificationMessage);
                 })
                 .EndInit();
-            
+
+            userService.InitUserId();
         }
 
         protected override void ConfigureViewModelLocator()

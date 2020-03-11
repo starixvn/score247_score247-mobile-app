@@ -25,14 +25,10 @@ namespace LiveScore.Soccer.Services
             INetworkConnection networkConnection)
             : base(loggingService)
         {
-            Debug.WriteLine("SettingsService constructor");
-
             this.userSettingService = userSettingService;
             this.userService = userService;
             settingsApi = apiService.GetApi<SettingsApi>();
             this.networkConnection = networkConnection;
-
-            Task.Run(SyncNotification).ConfigureAwait(false);
         }
 
         public bool GetNotificationStatus()
