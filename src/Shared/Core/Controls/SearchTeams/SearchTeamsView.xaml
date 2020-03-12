@@ -69,7 +69,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Text="{Binding Heading, Converter={StaticResource UpperCaseConverter}"
+                                    <Label Grid.Row="0" Text="{Binding Heading, Converter={StaticResource UpperCaseConverter}}"
                                        Padding="16,0,0,0"
                                        Style="{StaticResource LeagueName}">
                                     </Label>
