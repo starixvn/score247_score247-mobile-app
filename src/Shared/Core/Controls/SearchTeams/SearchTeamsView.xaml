@@ -56,6 +56,7 @@
             <ListView Style="{StaticResource ListViewHasBackground}"
                       ItemsSource="{Binding DefaultSearch}"
                       IsVisible="{Binding ShowTrendingHeader}"
+                      Scrolled="ListView_OnScrolled"
                       HasUnevenRows="True"
                       IsGroupingEnabled="True"
                       SeparatorVisibility="None">
