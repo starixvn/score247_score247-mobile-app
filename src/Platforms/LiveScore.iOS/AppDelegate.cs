@@ -60,7 +60,8 @@ namespace LiveScore.iOS
                 notificationMessage = new NotificationMessage(
                      customNotificationData?.ValueForKey(new NSString("SportId")).ToString(),
                      customNotificationData?.ValueForKey(new NSString("id")).ToString(),
-                     customNotificationData?.ValueForKey(new NSString("type")).ToString());
+                     customNotificationData?.ValueForKey(new NSString("type")).ToString(),
+                     customNotificationData?.ValueForKey(new NSString("EventDate")).ToString());
             }
 
             return notificationMessage;

@@ -75,15 +75,15 @@ namespace LiveScore
                 .InFocusDisplaying(OSInFocusDisplayOption.Notification)
                 .HandleNotificationOpened((result) =>
                 {
-                    Debug.WriteLine("HandleNotificationOpened");
-
                     var notificationMessage = new NotificationMessage(
                             result.notification.payload.additionalData["SportId"].ToString(),
                             result.notification.payload.additionalData["id"].ToString(),
                             result.notification.payload.additionalData["type"].ToString(),
+                            result.notification.payload.additionalData["EventDate"].ToString(),
                             result.notification.payload.title,
                             result.notification.payload.body);
 
+                    Debug.WriteLine($"HandleNotificationOpened match {notificationMessage.Id}");
 
                     HandlePushNotification(notificationMessage);
                 })

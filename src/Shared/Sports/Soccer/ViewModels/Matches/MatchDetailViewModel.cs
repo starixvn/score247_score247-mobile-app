@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -101,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         {
             IMatch match = null;
             bool isInitFromNotification = false;
-
+            
             if (parameters?["Match"] is IMatch)
             {
                 match = parameters["Match"] as IMatch;
@@ -109,7 +110,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
             else if (parameters?["Id"] is string matchId)
             {
+                currentMatchEventDate = DateTimeOffset.Parse(parameters["EventDate"].ToString());
                 var matchInfo = await GetMatch(matchId);
+
+                Debug.WriteLine($"Match EventDate {currentMatchEventDate.ToString()}");
+
                 match = matchInfo?.Match;
                 isInitFromNotification = true;
             }

@@ -74,7 +74,8 @@ namespace LiveScore.Views
 
                 var parameters = new NavigationParameters
                 {
-                    { "Id", message.Id }
+                    { "Id", message.Id },
+                    { "EventDate", message.EventDate }
                 };
 
                 page.BindingContext = matchDetailViewModel;

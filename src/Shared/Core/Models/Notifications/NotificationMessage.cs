@@ -11,12 +11,14 @@ namespace LiveScore.Core.Models.Notifications
             string sportId,
             string id,
             string type,
+            string eventDate,
             string title = null,
             string message = null)
         {
             SportType = Enumeration.FromValue<SportType>(Convert.ToByte(sportId));
             Id = id;
             Type = Enumeration.FromValue<NotificationType>(Convert.ToByte(type));
+            EventDate = DateTimeOffset.Parse(eventDate);
             Title = title;
             Message = message;
         }
@@ -30,5 +32,7 @@ namespace LiveScore.Core.Models.Notifications
         public string Title { get; }
 
         public string Message { get; }
+
+        public DateTimeOffset EventDate { get; }
     }
 }
